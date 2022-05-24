@@ -151,6 +151,7 @@
             </com.haibin.calendarview.CalendarView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.haibin.calendarview.CalendarLayout>
@@ -160,7 +161,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
