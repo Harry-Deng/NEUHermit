@@ -15,7 +15,6 @@ import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.sora.gcdr.adapter.TaskListAdapter;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
-import com.sora.gcdr.db.Task;
 import com.sora.gcdr.model.TaskViewModel;
 
 
@@ -57,10 +56,7 @@ public class HomeFragment extends Fragment implements
             }
         });
 
-        binding.fab.setOnClickListener(v -> {
-            Task task = new Task(System.currentTimeMillis(), "第二条记录", false);
-            taskViewModel.addTask(task);
-        });
+
 
         binding.calendarView.setOnCalendarSelectListener(this);
         binding.calendarView.setOnYearChangeListener(this);
@@ -82,6 +78,7 @@ public class HomeFragment extends Fragment implements
                 binding.textViewMonthDay.setText(String.valueOf(mYear));
             }
         });
+
         binding.flCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
