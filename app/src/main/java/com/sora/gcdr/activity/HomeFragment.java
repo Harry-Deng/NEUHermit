@@ -5,10 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -18,11 +18,14 @@ import android.view.ViewGroup;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
-import com.sora.gcdr.MyApplication;
+
 import com.sora.gcdr.R;
 import com.sora.gcdr.adapter.TaskListAdapter;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
+import com.sora.gcdr.db.Task;
 import com.sora.gcdr.model.TaskViewModel;
+
+import java.util.List;
 
 
 public class HomeFragment extends Fragment implements
@@ -32,6 +35,8 @@ public class HomeFragment extends Fragment implements
     private FragmentHomeBinding binding;
     private TaskViewModel taskViewModel;
     private TaskListAdapter adapter;
+
+    Calendar selectedCalendar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +53,13 @@ public class HomeFragment extends Fragment implements
         super.onViewCreated(view, savedInstanceState);
         taskViewModel = new ViewModelProvider(requireActivity()).get(TaskViewModel.class);
 
+        binding.textViewLunar.setVisibility(View.VISIBLE);
+        binding.textViewYear.setVisibility(View.VISIBLE);
+
+        selectedCalendar = binding.calendarView.getSelectedCalendar();
+        binding.textViewMonthDay.setText(selectedCalendar.getYear() + "月" + selectedCalendar.getDay() + "日");
+        binding.textViewYear.setText(String.valueOf(selectedCalendar.getYear()));
+        binding.textViewLunar.setText(selectedCalendar.getLunar());
 
         taskViewModel.setYear(binding.calendarView.getCurYear());
         taskViewModel.setMonth(binding.calendarView.getCurMonth());
@@ -80,7 +92,6 @@ public class HomeFragment extends Fragment implements
         binding.calendarView.setOnCalendarSelectListener(this);
         binding.calendarView.setOnYearChangeListener(this);
 
-
         binding.textViewMonthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,14 +122,6 @@ public class HomeFragment extends Fragment implements
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-    }
-
-
-
-    @Override
     public void onCalendarOutOfRange(Calendar calendar) {
 
     }
@@ -136,8 +139,17 @@ public class HomeFragment extends Fragment implements
         taskViewModel.setMonth(calendar.getMonth());
         taskViewModel.setDay(calendar.getDay());
 
-        taskViewModel.updateDayTaskLive();
-        adapter.notifyDataSetChanged();
+        {
+            taskViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
+            taskViewModel.updateDayTaskLive();
+            taskViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+                @Override
+                public void onChanged(List<Task> tasks) {
+                    adapter.setDayTasks(tasks);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
 
         Log.e("onDateSelected", "  -- " + calendar.getYear() +
                 "  --  " + calendar.getMonth() +

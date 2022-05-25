@@ -52,7 +52,7 @@ public class AddTaskFragment extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                binding.textViewDate.setText("" + year + "-" + month + 1 + "-" + dayOfMonth);
+                                binding.textViewDate.setText("" + year + "-" + (month+1)+ "-" + dayOfMonth);
                             }
                         }, taskViewModel.getYear(), taskViewModel.getMonth(), taskViewModel.getDay()).show();
             }
