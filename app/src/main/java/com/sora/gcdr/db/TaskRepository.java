@@ -17,15 +17,22 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class TaskRepository {
-    private final LiveData<List<Task>> dayTasksLive;
+    private LiveData<List<Task>> dayTasksLive;
     private final TaskDao taskDao;
 
     public TaskRepository(Context context) {
         TaskDatabase db = TaskDatabase.getDatabase(context);
         this.taskDao = db.getTaskDao();
         this.dayTasksLive = taskDao.getTaskByTime(
-                MyUtils.getCurrentDayMinTime(2022,5,24),
-                MyUtils.getCurrentDayMaxTime(2022,5,24)
+                MyUtils.getCurrentDayMinTime(2022,5,25),
+                MyUtils.getCurrentDayMaxTime(2022,5,25)
+        );
+    }
+
+    public void setDayTasksLive(int year,int month,int day) {
+        this.dayTasksLive = taskDao.getTaskByTime(
+                MyUtils.getCurrentDayMinTime(year, month, day),
+                MyUtils.getCurrentDayMaxTime(year, month, day)
         );
     }
 

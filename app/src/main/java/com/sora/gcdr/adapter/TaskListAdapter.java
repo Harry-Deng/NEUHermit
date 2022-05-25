@@ -1,5 +1,6 @@
 package com.sora.gcdr.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -34,6 +35,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(binding.getRoot());
             this.binding = binding;
         }
+
     }
 
     @NonNull
@@ -45,12 +47,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        Task task = taskViewModel.getDayTaskLive().getValue().get(position);
-
-        if (task == null) {
-            task = new Task(MyUtils.getCurrentTime(), "也许有bug", false);
+        List<Task> value = taskViewModel.getDayTaskLive().getValue();
+        if (value == null) {
+            return;
         }
-
+        Task task = value.get(position);
         holder.binding.textViewId.setText(String.valueOf(position + 1));
         holder.binding.textViewTime.setText(
                 MyUtils.getTimeByLong(task.getDate()));

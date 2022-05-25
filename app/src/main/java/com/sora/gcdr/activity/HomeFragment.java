@@ -2,8 +2,13 @@ package com.sora.gcdr.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -13,6 +18,8 @@ import android.view.ViewGroup;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
+import com.sora.gcdr.MyApplication;
+import com.sora.gcdr.R;
 import com.sora.gcdr.adapter.TaskListAdapter;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
 import com.sora.gcdr.model.TaskViewModel;
@@ -25,14 +32,28 @@ public class HomeFragment extends Fragment implements
     private FragmentHomeBinding binding;
     private TaskViewModel taskViewModel;
     private TaskListAdapter adapter;
-    private int year, month, day, mYear, curDay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        taskViewModel = new ViewModelProvider(requireActivity()).get(TaskViewModel.class);
+
+
+        taskViewModel.setYear(binding.calendarView.getCurYear());
+        taskViewModel.setMonth(binding.calendarView.getCurMonth());
+        taskViewModel.setDay(binding.calendarView.getCurDay());
+
+
         adapter = new TaskListAdapter(taskViewModel);
         binding.recycleView.setAdapter(adapter);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -49,21 +70,16 @@ public class HomeFragment extends Fragment implements
                     binding.calendarLayout.expand();
                     return;
                 }
-                binding.calendarView.showYearSelectLayout(mYear);
+                binding.calendarView.showYearSelectLayout(taskViewModel.getYear());
                 binding.textViewLunar.setVisibility(View.GONE);
                 binding.textViewYear.setVisibility(View.GONE);
-                binding.textViewMonthDay.setText(String.valueOf(mYear));
+                binding.textViewMonthDay.setText(String.valueOf(taskViewModel.getYear()));
             }
         });
 
-
-
         binding.calendarView.setOnCalendarSelectListener(this);
         binding.calendarView.setOnYearChangeListener(this);
-        mYear = binding.calendarView.getCurYear();
-        year = binding.calendarView.getCurYear();
-        month = binding.calendarView.getCurMonth();
-        curDay = binding.calendarView.getCurDay();
+
 
         binding.textViewMonthDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +88,10 @@ public class HomeFragment extends Fragment implements
                     binding.calendarLayout.expand();
                     return;
                 }
-                binding.calendarView.showYearSelectLayout(mYear);
+                binding.calendarView.showYearSelectLayout(taskViewModel.getYear());
                 binding.textViewLunar.setVisibility(View.GONE);
                 binding.textViewYear.setVisibility(View.GONE);
-                binding.textViewMonthDay.setText(String.valueOf(mYear));
+                binding.textViewMonthDay.setText(String.valueOf(taskViewModel.getYear()));
             }
         });
 
@@ -87,9 +103,12 @@ public class HomeFragment extends Fragment implements
         });
 
 
-        return binding.getRoot();
-    }
+        binding.fab.setOnClickListener(v -> {
+            NavController controller = Navigation.findNavController(v);
+            controller.navigate(R.id.action_homeFragment_to_addTaskFragment);
+        });
 
+    }
 
     @Override
     public void onDestroy() {
@@ -113,10 +132,12 @@ public class HomeFragment extends Fragment implements
         binding.textViewYear.setText(String.valueOf(calendar.getYear()));
         binding.textViewLunar.setText(calendar.getLunar());
 
-        mYear = calendar.getYear();
-        year = calendar.getYear();
-        month = calendar.getMonth();
-        curDay = calendar.getDay();
+        taskViewModel.setYear(calendar.getYear());
+        taskViewModel.setMonth(calendar.getMonth());
+        taskViewModel.setDay(calendar.getDay());
+
+        taskViewModel.updateDayTaskLive();
+        adapter.notifyDataSetChanged();
 
         Log.e("onDateSelected", "  -- " + calendar.getYear() +
                 "  --  " + calendar.getMonth() +

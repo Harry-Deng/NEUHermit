@@ -10,7 +10,9 @@
         android:id="@+id/textViewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="2"
         android:text="9"
+        android:textAlignment="viewStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/textViewTime"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,23 +23,24 @@
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4:46"
+        android:ems="3"
+        android:text="14:46"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textViewId"
-        app:layout_constraintEnd_toStartOf="@+id/textViewContent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDone"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewId" />
 
     <TextView
         android:id="@+id/textViewContent"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="content"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewTime"
-        app:layout_constraintEnd_toStartOf="@+id/textViewDone"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewTime" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewDone"
+        app:layout_constraintStart_toStartOf="@+id/textViewId"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTime"
+        tools:text="content" />
 
     <TextView
         android:id="@+id/textViewDone"
@@ -45,8 +48,8 @@
         android:layout_height="wrap_content"
         android:text="done"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewContent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewContent" />
+        app:layout_constraintStart_toEndOf="@+id/textViewTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

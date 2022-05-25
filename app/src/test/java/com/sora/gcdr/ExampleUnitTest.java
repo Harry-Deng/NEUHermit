@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.sora.gcdr.util.MyUtils;
+
+import java.util.Calendar;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,6 +16,8 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        System.out.println(MyUtils.timeToLong("2022-5-25 1:5"));
+        
+        System.out.println(java.util.Calendar.getInstance().get(Calendar.HOUR_OF_DAY)); ;
     }
 }
