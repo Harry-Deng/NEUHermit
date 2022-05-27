@@ -29,6 +29,11 @@ public class MyUtils {
         return sdf.format(date);
     }
 
+    public static String getDateByLong(long date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd", Locale.CHINA);
+        return sdf.format(new Date(date));
+    }
+
     public static long timeToLong(String datetime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm", Locale.CHINA);
         try {

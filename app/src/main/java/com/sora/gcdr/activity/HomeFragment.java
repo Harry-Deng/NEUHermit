@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,18 +21,20 @@ import android.view.ViewGroup;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
+import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.R;
 import com.sora.gcdr.adapter.TaskListAdapter;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
 import com.sora.gcdr.db.Task;
 import com.sora.gcdr.model.TaskViewModel;
 
+import java.util.Collections;
 import java.util.List;
 
 
 public class HomeFragment extends Fragment implements
         CalendarView.OnYearChangeListener,
-        CalendarView.OnCalendarSelectListener{
+        CalendarView.OnCalendarSelectListener {
 
     private FragmentHomeBinding binding;
     private TaskViewModel taskViewModel;
@@ -43,7 +47,6 @@ public class HomeFragment extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
 
         return binding.getRoot();
     }
@@ -64,7 +67,7 @@ public class HomeFragment extends Fragment implements
         taskViewModel.setYear(binding.calendarView.getCurYear());
         taskViewModel.setMonth(binding.calendarView.getCurMonth());
         taskViewModel.setDay(binding.calendarView.getCurDay());
-
+        taskViewModel.updateDayTaskLive();
 
         adapter = new TaskListAdapter(taskViewModel);
         binding.recycleView.setAdapter(adapter);
@@ -119,6 +122,27 @@ public class HomeFragment extends Fragment implements
             controller.navigate(R.id.action_homeFragment_to_addTaskFragment);
         });
 
+
+        //右滑删除
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.
+                SimpleCallback(0
+                ,ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView,
+                                  RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                 int direction) {
+                taskViewModel.delete(taskViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition())); ;
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        helper.attachToRecyclerView(binding.recycleView);
+
     }
 
     @Override
@@ -139,17 +163,17 @@ public class HomeFragment extends Fragment implements
         taskViewModel.setMonth(calendar.getMonth());
         taskViewModel.setDay(calendar.getDay());
 
-        {
-            taskViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
-            taskViewModel.updateDayTaskLive();
-            taskViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
-                @Override
-                public void onChanged(List<Task> tasks) {
-                    adapter.setDayTasks(tasks);
-                    adapter.notifyDataSetChanged();
-                }
-            });
-        }
+
+        taskViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
+        taskViewModel.updateDayTaskLive();
+        taskViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                adapter.setDayTasks(tasks);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
 
         Log.e("onDateSelected", "  -- " + calendar.getYear() +
                 "  --  " + calendar.getMonth() +

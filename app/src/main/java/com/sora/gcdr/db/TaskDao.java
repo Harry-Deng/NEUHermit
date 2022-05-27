@@ -2,8 +2,10 @@ package com.sora.gcdr.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -16,6 +18,12 @@ public interface TaskDao {
 
     @Query("SELECT * FROM t_task WHERE task_date BETWEEN :from AND :to")
     LiveData<List<Task>> getTaskByTime(long from, long to);
+
+    @Delete
+    Completable deleteTask(Task... tasks);
+
+    @Update
+    Completable updateTask(Task... tasks);
 
     @Query("DELETE FROM T_TASK")
     void deleteAllTasks();

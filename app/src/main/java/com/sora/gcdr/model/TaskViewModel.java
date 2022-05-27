@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.sora.gcdr.db.Task;
 import com.sora.gcdr.db.TaskRepository;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class TaskViewModel extends AndroidViewModel {
@@ -21,6 +22,9 @@ public class TaskViewModel extends AndroidViewModel {
     public TaskViewModel(@NonNull Application application) {
         super(application);
         repository = new TaskRepository(application);
+        year = Calendar.getInstance().get(Calendar.YEAR);
+        month = Calendar.getInstance().get(Calendar.MONTH);
+        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
     public void addTask(Task task) {
@@ -38,6 +42,15 @@ public class TaskViewModel extends AndroidViewModel {
     public TaskRepository getRepository() {
         return repository;
     }
+
+    public void delete(Task... tasks) {
+        repository.delete(tasks);
+    }
+
+    public void update(Task... tasks) {
+        repository.update(tasks);
+    }
+
 
     public int getYear() {
         return year;
