@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity  {
         NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
         controller = hostFragment.getNavController();
-        NavigationUI.setupActionBarWithNavController(this,controller);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return controller.navigateUp();
+        controller.navigateUp();
     }
 }
