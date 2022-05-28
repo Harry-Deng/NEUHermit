@@ -23,4 +23,14 @@
             android:id="@+id/action_addTaskFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="com.sora.gcdr.MyInfoFragment"
+        android:label="fragment_my_info"
+        tools:layout="@layout/fragment_my_info" />
+    <fragment
+        android:id="@+id/easyAppFragment"
+        android:name="com.sora.gcdr.EasyAppFragment"
+        android:label="fragment_easy_app"
+        tools:layout="@layout/fragment_easy_app" />
 </navigation>
