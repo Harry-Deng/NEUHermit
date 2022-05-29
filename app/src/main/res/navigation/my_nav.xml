@@ -9,20 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.sora.gcdr.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/addTaskFragment"
-        android:name="com.sora.gcdr.ui.home.AddTaskFragment"
-        android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task" >
-        <action
-            android:id="@+id/action_addTaskFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="com.sora.gcdr.ui.me.MyInfoFragment"

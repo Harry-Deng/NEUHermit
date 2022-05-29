@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sora.gcdr">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -18,15 +18,19 @@
         android:theme="@style/Theme.GoodCalendar"
         tools:targetApi="31">
         <activity
-            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.home.AddTaskActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
 
     </application>
 

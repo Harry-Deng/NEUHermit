@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.util.MyUtils;
 
-import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.CompletableObserver;
@@ -18,13 +17,23 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class TaskRepository {
+    private static TaskRepository INSTANCE;
     private LiveData<List<Task>> dayTasksLive;
     private final TaskDao taskDao;
 
-    public TaskRepository(Context context) {
+    private TaskRepository(Context context) {
         TaskDatabase db = TaskDatabase.getDatabase(context);
         this.taskDao = db.getTaskDao();
         this.dayTasksLive = taskDao.getTaskByTime(0, 0);
+    }
+
+    public static TaskRepository getTaskRepository(Context context) {
+        synchronized (TaskDatabase.class) {
+            if (INSTANCE == null) {
+                INSTANCE = new TaskRepository(context);
+            }
+        }
+        return INSTANCE;
     }
 
     public void setDayTasksLive(int year, int month, int day) {

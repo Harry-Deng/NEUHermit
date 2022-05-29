@@ -6,4 +6,6 @@
     <string name="buttonCancel">Cancel</string>
     <string name="month_day_d_d">%d月%d日</string>
     <string name="_d">%d</string>
+    <string name="year_month_day_d_d_d">%d-%d-%d</string>
+    <string name="hour_minute_d_d">%d:%d</string>
 </resources>

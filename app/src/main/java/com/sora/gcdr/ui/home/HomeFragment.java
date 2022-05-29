@@ -1,28 +1,27 @@
 package com.sora.gcdr.ui.home;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
-import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
-import com.sora.gcdr.db.Task;
 
-import java.util.List;
+import java.util.Objects;
 
 /**
  * 日历页界面
@@ -35,10 +34,18 @@ public class HomeFragment extends Fragment implements
     private HomeViewModel homeViewModel;
     private TaskListAdapter adapter;
 
+    ActivityResultLauncher<Intent> intentActivityResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        //回调函数 Parcelable task = result.getData().getParcelableExtra("task");
+
+        //homeViewModel.addTask(task);
+    });
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
@@ -48,46 +55,42 @@ public class HomeFragment extends Fragment implements
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         //数据绑定，部分使用
         binding.setData(homeViewModel);
-
         adapter = new TaskListAdapter(homeViewModel);
         binding.recycleView.setAdapter(adapter);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //启动时手动触发一次 日期选中事件
         onCalendarSelect(binding.calendarView.getSelectedCalendar(),true);
+        binding.tvCurrentDay.setText(String.valueOf(homeViewModel.getDay()));
+
         //左上角日期点击后触发年视图，函数写在外面
-        binding.textViewMonthDay.setOnClickListener(this::monthDayOnClickListener);
+        binding.textViewMonthDay.setOnClickListener(this::onMonthDayClickListener);
         //日期选中事件
         binding.calendarView.setOnCalendarSelectListener(this);
         //年视图的日期选中事件
         binding.calendarView.setOnYearChangeListener(this);
-
         //右上角回到今日
         binding.flCurrent.setOnClickListener(v -> {
             binding.calendarView.closeYearSelectLayout();
             binding.calendarView.scrollToCurrent();
         });
-        //添加待办的点击事件
-        binding.fab.setOnClickListener(v -> {
-            NavController controller = Navigation.findNavController(v);
-            controller.navigate(R.id.action_homeFragment_to_addTaskFragment);
-        });
+        binding.fab.setOnClickListener(this::onAddTaskClickedListener);
 
         //右滑删除
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.
                 SimpleCallback(0
                 ,ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView,
-                                  RecyclerView.ViewHolder viewHolder,
-                                  RecyclerView.ViewHolder target) {
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder,
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                  int direction) {
-                homeViewModel.delete(homeViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition())); ;
+                homeViewModel.delete(Objects.requireNonNull(homeViewModel.getDayTaskLive().getValue()).get(viewHolder.getAdapterPosition()));
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         });
@@ -100,6 +103,7 @@ public class HomeFragment extends Fragment implements
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         //显示年和阴历
@@ -113,12 +117,7 @@ public class HomeFragment extends Fragment implements
         //同步选中日的待办
         homeViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
         homeViewModel.updateDayTaskLive();
-        homeViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
-            @Override
-            public void onChanged(List<Task> tasks) {
-                adapter.notifyDataSetChanged();
-            }
-        });
+        homeViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), tasks -> adapter.notifyDataSetChanged());
     }
 
     @Override
@@ -126,7 +125,7 @@ public class HomeFragment extends Fragment implements
         binding.textViewMonthDay.setText(String.valueOf(year));
     }
 
-    private void monthDayOnClickListener(View v) {
+    private void onMonthDayClickListener(View v) {
         if (!binding.calendarLayout.isExpand()) {
             binding.calendarLayout.expand();
             return;
@@ -135,5 +134,17 @@ public class HomeFragment extends Fragment implements
         binding.textViewLunar.setVisibility(View.GONE);
         binding.textViewYear.setVisibility(View.GONE);
         binding.textViewMonthDay.setText(String.valueOf(homeViewModel.getYear()));
+    }
+
+    /**
+     * 添加待办的点击事件，跳转到添加待办的Activity，把当前选中的数据传过去
+     */
+    private void onAddTaskClickedListener(View v) {
+        Intent intent = new Intent(getContext(), AddTaskActivity.class);
+        intent.putExtra("year", homeViewModel.getYear());
+        intent.putExtra("month", homeViewModel.getMonth());
+        intent.putExtra("day", homeViewModel.getDay());
+//        startActivity(intent);
+        intentActivityResultLauncher.launch(intent);
     }
 }

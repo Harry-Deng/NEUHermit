@@ -1,7 +1,6 @@
 package com.sora.gcdr.ui.home;
 
 import android.app.Application;
-import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,9 +9,11 @@ import androidx.lifecycle.LiveData;
 import com.sora.gcdr.db.Task;
 import com.sora.gcdr.db.TaskRepository;
 
-import java.util.Calendar;
 import java.util.List;
 
+/**
+ * ViewModel保存数据
+ */
 public class HomeViewModel extends AndroidViewModel {
     private final TaskRepository repository;
 
@@ -22,7 +23,7 @@ public class HomeViewModel extends AndroidViewModel {
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        repository = new TaskRepository(application);
+        repository = TaskRepository.getTaskRepository(application);
     }
 
     public void addTask(Task task) {
@@ -36,10 +37,6 @@ public class HomeViewModel extends AndroidViewModel {
         repository.setDayTasksLive(year,month,day);
     }
 
-
-    public TaskRepository getRepository() {
-        return repository;
-    }
 
     public void delete(Task... tasks) {
         repository.delete(tasks);
@@ -74,7 +71,4 @@ public class HomeViewModel extends AndroidViewModel {
         this.day = day;
     }
 
-    public String getDate() {
-        return year + "-" + month + "-" + day;
-    }
 }

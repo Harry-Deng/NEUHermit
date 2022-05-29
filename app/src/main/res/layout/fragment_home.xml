@@ -92,16 +92,6 @@
                 </LinearLayout>
 
 
-                <ImageView
-                    android:id="@+id/mood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@id/fl_current"
-                    android:padding="10dp"
-                    android:src="@mipmap/img_12" />
-
                 <FrameLayout
                     android:id="@+id/fl_current"
                     android:layout_width="32dp"
@@ -128,7 +118,6 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="2dp"
                         android:gravity="center"
-                        android:text="13"
                         android:textColor="#000000"
                         android:textSize="12sp" />
                 </FrameLayout>
