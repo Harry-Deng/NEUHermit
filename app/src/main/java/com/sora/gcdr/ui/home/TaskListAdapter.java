@@ -34,7 +34,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             this.binding = binding;
 
         }
-
     }
 
     @NonNull

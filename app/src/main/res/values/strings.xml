@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="buttonOK">OK</string>
     <string name="buttonCancel">Cancel</string>
+    <string name="month_day_d_d">%d月%d日</string>
+    <string name="_d">%d</string>
 </resources>

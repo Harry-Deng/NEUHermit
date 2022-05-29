@@ -1,6 +1,7 @@
 package com.sora.gcdr.ui.home;
 
 import android.app.Application;
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -22,9 +23,6 @@ public class HomeViewModel extends AndroidViewModel {
     public HomeViewModel(@NonNull Application application) {
         super(application);
         repository = new TaskRepository(application);
-        year = Calendar.getInstance().get(Calendar.YEAR);
-        month = Calendar.getInstance().get(Calendar.MONTH);
-        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
     public void addTask(Task task) {
