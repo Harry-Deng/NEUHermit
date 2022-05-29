@@ -1,4 +1,4 @@
-package com.sora.gcdr.activity;
+package com.sora.gcdr.ui.home;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import android.widget.TimePicker;
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentAddTaskBinding;
 import com.sora.gcdr.db.Task;
-import com.sora.gcdr.model.TaskViewModel;
+import com.sora.gcdr.ui.home.HomeViewModel;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.Calendar;
@@ -27,7 +26,7 @@ import java.util.Calendar;
 public class AddTaskFragment extends Fragment {
 
     FragmentAddTaskBinding binding;
-    TaskViewModel taskViewModel;
+    HomeViewModel homeViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -41,8 +40,8 @@ public class AddTaskFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //        binding.textViewDate.setText();
-        taskViewModel = new ViewModelProvider(requireActivity()).get(TaskViewModel.class);
-        binding.textViewDate.setText(taskViewModel.getDate());
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        binding.textViewDate.setText(homeViewModel.getDate());
         binding.textViewTime.setText(MyUtils.getTimeByLong(System.currentTimeMillis()));
 
         binding.textViewDate.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +53,7 @@ public class AddTaskFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 binding.textViewDate.setText("" + year + "-" + (month+1)+ "-" + dayOfMonth);
                             }
-                        }, taskViewModel.getYear(), taskViewModel.getMonth(), taskViewModel.getDay()).show();
+                        }, homeViewModel.getYear(), homeViewModel.getMonth(), homeViewModel.getDay()).show();
             }
         });
         binding.textViewTime.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,7 @@ public class AddTaskFragment extends Fragment {
                         binding.editTextContent.getText().toString(),
                         false
                 );
-                taskViewModel.addTask(task);
+                homeViewModel.addTask(task);
                 Navigation.findNavController(v).navigate(R.id.action_addTaskFragment_to_homeFragment);
             }
         });

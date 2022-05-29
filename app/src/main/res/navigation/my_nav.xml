@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sora.gcdr.activity.HomeFragment"
+        android:name="com.sora.gcdr.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.sora.gcdr.activity.AddTaskFragment"
+        android:name="com.sora.gcdr.ui.home.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task" >
         <action
@@ -25,12 +25,24 @@
     </fragment>
     <fragment
         android:id="@+id/myInfoFragment"
-        android:name="com.sora.gcdr.MyInfoFragment"
+        android:name="com.sora.gcdr.ui.me.MyInfoFragment"
         android:label="fragment_my_info"
         tools:layout="@layout/fragment_my_info" />
     <fragment
         android:id="@+id/easyAppFragment"
-        android:name="com.sora.gcdr.EasyAppFragment"
+        android:name="com.sora.gcdr.ui.app.EasyAppFragment"
         android:label="fragment_easy_app"
-        tools:layout="@layout/fragment_easy_app" />
+        tools:layout="@layout/fragment_easy_app" >
+        <action
+            android:id="@+id/action_easyAppFragment_to_addShareFragment"
+            app:destination="@id/addShareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShareFragment"
+        android:name="com.sora.gcdr.ui.app.AddShareFragment"
+        android:label="AddShareFragment" >
+        <action
+            android:id="@+id/action_addShareFragment_to_easyAppFragment"
+            app:destination="@id/easyAppFragment" />
+    </fragment>
 </navigation>

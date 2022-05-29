@@ -7,7 +7,7 @@
     android:background="#ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activity.HomeFragment">
+    tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

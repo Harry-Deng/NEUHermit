@@ -1,4 +1,4 @@
-package com.sora.gcdr.activity;
+package com.sora.gcdr.ui.home;
 
 import android.os.Bundle;
 
@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,14 +21,10 @@ import android.view.ViewGroup;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
-import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.R;
-import com.sora.gcdr.adapter.TaskListAdapter;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
 import com.sora.gcdr.db.Task;
-import com.sora.gcdr.model.TaskViewModel;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -38,7 +33,7 @@ public class HomeFragment extends Fragment implements
         CalendarView.OnCalendarSelectListener {
 
     private FragmentHomeBinding binding;
-    private TaskViewModel taskViewModel;
+    private HomeViewModel homeViewModel;
     private TaskListAdapter adapter;
 
     Calendar selectedCalendar;
@@ -55,7 +50,7 @@ public class HomeFragment extends Fragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        taskViewModel = new ViewModelProvider(requireActivity()).get(TaskViewModel.class);
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
         binding.textViewLunar.setVisibility(View.VISIBLE);
         binding.textViewYear.setVisibility(View.VISIBLE);
@@ -65,17 +60,17 @@ public class HomeFragment extends Fragment implements
         binding.textViewYear.setText(String.valueOf(selectedCalendar.getYear()));
         binding.textViewLunar.setText(selectedCalendar.getLunar());
 
-        taskViewModel.setYear(binding.calendarView.getCurYear());
-        taskViewModel.setMonth(binding.calendarView.getCurMonth());
-        taskViewModel.setDay(binding.calendarView.getCurDay());
-        taskViewModel.updateDayTaskLive();
+        homeViewModel.setYear(binding.calendarView.getCurYear());
+        homeViewModel.setMonth(binding.calendarView.getCurMonth());
+        homeViewModel.setDay(binding.calendarView.getCurDay());
+        homeViewModel.updateDayTaskLive();
 
-        adapter = new TaskListAdapter(taskViewModel);
+        adapter = new TaskListAdapter(homeViewModel);
         binding.recycleView.setAdapter(adapter);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        taskViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), tasks -> {
-            adapter.setDayTasks(tasks);
+        homeViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), tasks -> {
+//            adapter.setDayTasks(tasks);
             adapter.notifyDataSetChanged();
         });
 
@@ -86,10 +81,10 @@ public class HomeFragment extends Fragment implements
                     binding.calendarLayout.expand();
                     return;
                 }
-                binding.calendarView.showYearSelectLayout(taskViewModel.getYear());
+                binding.calendarView.showYearSelectLayout(homeViewModel.getYear());
                 binding.textViewLunar.setVisibility(View.GONE);
                 binding.textViewYear.setVisibility(View.GONE);
-                binding.textViewMonthDay.setText(String.valueOf(taskViewModel.getYear()));
+                binding.textViewMonthDay.setText(String.valueOf(homeViewModel.getYear()));
             }
         });
 
@@ -103,10 +98,10 @@ public class HomeFragment extends Fragment implements
                     binding.calendarLayout.expand();
                     return;
                 }
-                binding.calendarView.showYearSelectLayout(taskViewModel.getYear());
+                binding.calendarView.showYearSelectLayout(homeViewModel.getYear());
                 binding.textViewLunar.setVisibility(View.GONE);
                 binding.textViewYear.setVisibility(View.GONE);
-                binding.textViewMonthDay.setText(String.valueOf(taskViewModel.getYear()));
+                binding.textViewMonthDay.setText(String.valueOf(homeViewModel.getYear()));
             }
         });
 
@@ -138,7 +133,7 @@ public class HomeFragment extends Fragment implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder,
                                  int direction) {
-                taskViewModel.delete(taskViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition())); ;
+                homeViewModel.delete(homeViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition())); ;
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         });
@@ -160,17 +155,17 @@ public class HomeFragment extends Fragment implements
         binding.textViewYear.setText(String.valueOf(calendar.getYear()));
         binding.textViewLunar.setText(calendar.getLunar());
 
-        taskViewModel.setYear(calendar.getYear());
-        taskViewModel.setMonth(calendar.getMonth());
-        taskViewModel.setDay(calendar.getDay());
+        homeViewModel.setYear(calendar.getYear());
+        homeViewModel.setMonth(calendar.getMonth());
+        homeViewModel.setDay(calendar.getDay());
 
 
-        taskViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
-        taskViewModel.updateDayTaskLive();
-        taskViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+        homeViewModel.getDayTaskLive().removeObservers(getViewLifecycleOwner());
+        homeViewModel.updateDayTaskLive();
+        homeViewModel.getDayTaskLive().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
-                adapter.setDayTasks(tasks);
+//                adapter.setDayTasks(tasks);
                 adapter.notifyDataSetChanged();
             }
         });

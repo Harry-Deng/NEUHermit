@@ -1,4 +1,4 @@
-package com.sora.gcdr;
+package com.sora.gcdr.ui.me;
 
 import androidx.lifecycle.ViewModel;
 

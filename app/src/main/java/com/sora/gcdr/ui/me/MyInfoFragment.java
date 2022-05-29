@@ -1,4 +1,4 @@
-package com.sora.gcdr;
+package com.sora.gcdr.ui.me;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,24 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class EasyAppFragment extends Fragment {
+import com.sora.gcdr.R;
 
-    private EasyAppViewModel mViewModel;
+public class MyInfoFragment extends Fragment {
 
-    public static EasyAppFragment newInstance() {
-        return new EasyAppFragment();
+    private MyInfoViewModel mViewModel;
+
+    public static MyInfoFragment newInstance() {
+        return new MyInfoFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_easy_app, container, false);
+        return inflater.inflate(R.layout.fragment_my_info, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(EasyAppViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MyInfoViewModel.class);
         // TODO: Use the ViewModel
     }
 

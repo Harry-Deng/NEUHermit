@@ -1,4 +1,4 @@
-package com.sora.gcdr.model;
+package com.sora.gcdr.ui.home;
 
 import android.app.Application;
 
@@ -12,14 +12,14 @@ import com.sora.gcdr.db.TaskRepository;
 import java.util.Calendar;
 import java.util.List;
 
-public class TaskViewModel extends AndroidViewModel {
+public class HomeViewModel extends AndroidViewModel {
     private final TaskRepository repository;
 
     private int year;
     private int month;
     private int day;
 
-    public TaskViewModel(@NonNull Application application) {
+    public HomeViewModel(@NonNull Application application) {
         super(application);
         repository = new TaskRepository(application);
         year = Calendar.getInstance().get(Calendar.YEAR);

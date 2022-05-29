@@ -3,14 +3,12 @@ package com.sora.gcdr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.sora.gcdr.databinding.ActivityMainBinding;
-import com.sora.gcdr.model.TaskViewModel;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -34,8 +32,6 @@ public class MainActivity extends AppCompatActivity  {
                 .build();
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
-
-
 
 
 

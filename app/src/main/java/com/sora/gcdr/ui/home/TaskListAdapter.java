@@ -1,42 +1,29 @@
-package com.sora.gcdr.adapter;
+package com.sora.gcdr.ui.home;
 
 import android.content.DialogInterface;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.CellTaskBinding;
 import com.sora.gcdr.databinding.UpdateTaskBinding;
 import com.sora.gcdr.db.Task;
-import com.sora.gcdr.model.TaskViewModel;
-import com.sora.gcdr.outer.CustomMonthView;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder> {
-    private List<Task> dayTasks = new ArrayList<>();
-    private final TaskViewModel taskViewModel;
+    private final HomeViewModel homeViewModel;
 
-
-    public TaskListAdapter(TaskViewModel taskViewModel) {
-        this.taskViewModel = taskViewModel;
-    }
-
-    public void setDayTasks(List<Task> dayTasks) {
-        this.dayTasks = dayTasks;
+    public TaskListAdapter(HomeViewModel homeViewModel) {
+        this.homeViewModel = homeViewModel;
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
@@ -59,7 +46,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        List<Task> value = taskViewModel.getDayTaskLive().getValue();
+        List<Task> value = homeViewModel.getDayTaskLive().getValue();
         if (value == null) {
             return;
         }
@@ -91,7 +78,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 task.setContent(binding.editTextContent.getText().toString());
-                                taskViewModel.update(task);
+                                homeViewModel.update(task);
 
                             }
                         })
@@ -110,9 +97,9 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     @Override
     public int getItemCount() {
-        if (dayTasks == null)
+        if (homeViewModel.getDayTaskLive().getValue() == null)
             return 0;
-        return dayTasks.size();
+        return homeViewModel.getDayTaskLive().getValue().size();
     }
 
 }
