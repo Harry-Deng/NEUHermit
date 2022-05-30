@@ -1,26 +1,36 @@
 package com.sora.gcdr.ui.home;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sora.gcdr.R;
+import com.sora.gcdr.MyApplication;
+import com.sora.gcdr.activity.SetAlarmActivity;
 import com.sora.gcdr.databinding.CellTaskBinding;
-import com.sora.gcdr.databinding.UpdateTaskBinding;
 import com.sora.gcdr.db.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.List;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder> {
+    private Context mContext;
     private final HomeViewModel homeViewModel;
 
-    public TaskListAdapter(HomeViewModel homeViewModel) {
+    public TaskListAdapter(HomeViewModel homeViewModel, Context context) {
+        mContext = context;
         this.homeViewModel = homeViewModel;
     }
 
@@ -53,27 +63,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         holder.binding.textViewContent.setVisibility(TextUtils.isEmpty(task.getContent()) ? View.GONE : View.VISIBLE);
 
-        holder.binding.textViewDone.setText(String.valueOf(task.isDone()));
+        holder.binding.textViewDone.setText(String.valueOf(task.getStatus()));
 
-        //长按在当前页面调出一个对话框
+        //长按调出添加提醒的对话框，不再提供修改日程内容的接口
         holder.itemView.setOnLongClickListener(v -> {
-            //初始化对话框的布局并继承要修改的那个待办的数据
-            UpdateTaskBinding binding = UpdateTaskBinding.inflate(LayoutInflater.from(v.getContext()));
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            binding.textViewDate.setText(MyUtils.getDateByLong(task.getDate()));
-            binding.textViewTime.setText(MyUtils.getTimeByLong(task.getDate()));
-            binding.editTextContent.setText(task.getContent());
-            //对话框的构造
-            builder.setView(binding.getRoot())
-                    //确认按钮的name和事件
-                    .setPositiveButton(R.string.buttonOK, (dialog, which) -> {
-                        task.setContent(binding.editTextContent.getText().toString());
-                        homeViewModel.update(task);
-                    })
-                    //取消按钮的name和事件
-                    .setNegativeButton(R.string.buttonCancel, (dialog, which) -> dialog.cancel())
-                    .create()
-                    .show();
+            Intent intent = new Intent(v.getContext(), SetAlarmActivity.class);
+            intent.putExtra("task", task);
+            v.getContext().startActivity(intent);
             return true;
         });
     }

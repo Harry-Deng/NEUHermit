@@ -1,4 +1,4 @@
-package com.sora.gcdr.ui.home;
+package com.sora.gcdr.activity;
 
 import static cn.leancloud.LeanCloud.getContext;
 
@@ -40,12 +40,12 @@ public class AddTaskActivity extends AppCompatActivity {
         binding.textViewDate.setText((getString(R.string.year_month_day_d_d_d, curYear, curMonth, curDay)));
         binding.textViewTime.setText(MyUtils.getTimeByLong(System.currentTimeMillis()));
         //设置待办日期，弹出一个日期选择器
-        binding.textViewDate.setOnClickListener(v -> new DatePickerDialog(getContext(),
+        binding.textViewDate.setOnClickListener(v -> new DatePickerDialog(this,
                 (view1, year, month, dayOfMonth) -> binding.textViewDate.setText(getString(R.string.year_month_day_d_d_d, year, month + 1, dayOfMonth)),
                 curYear, curMonth, curDay)
                 .show());
         //设置待办时间，弹出一个时间选择器
-        binding.textViewTime.setOnClickListener(v -> new TimePickerDialog(getContext(), (view12, hourOfDay, minute) -> binding.textViewTime.setText(getString(R.string.hour_minute_d_d, hourOfDay, minute)),
+        binding.textViewTime.setOnClickListener(v -> new TimePickerDialog(this, (view12, hourOfDay, minute) -> binding.textViewTime.setText(getString(R.string.hour_minute_d_d, hourOfDay, minute)),
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true)
                 .show());
         //点击提交按钮，把待办提交到数据库，导航回到日历页面，并清理返回栈
@@ -55,7 +55,7 @@ public class AddTaskActivity extends AppCompatActivity {
             Task task = new Task(
                     MyUtils.timeToLong(datetime),
                     binding.editTextContent.getText().toString(),
-                    false
+                    1
             );
 //            TaskRepository.getTaskRepository(getContext()).insert(task);
             Intent res = new Intent();

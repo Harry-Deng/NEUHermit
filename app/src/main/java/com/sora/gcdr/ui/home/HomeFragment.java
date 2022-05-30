@@ -1,6 +1,5 @@
 package com.sora.gcdr.ui.home;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
+import com.sora.gcdr.activity.AddTaskActivity;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
 import com.sora.gcdr.db.Task;
 
@@ -41,17 +43,20 @@ public class HomeFragment extends Fragment implements
 
     //startActivityForResult的替代，等待添加的结果
     ActivityResultLauncher<Intent> intentActivityResultLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                //回调函数
-                if (result.getResultCode() == RESULT_OK) {
-                    if (result.getData() != null) {
-                        Task task = result.getData().getParcelableExtra("task");
-                        homeViewModel.addTask(task);
-                    } else {
-                        Toast.makeText(getContext(), "插入失败了", Toast.LENGTH_SHORT);
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    //回调函数
+                    if (result.getResultCode() == RESULT_OK) {
+                        if (result.getData() != null) {
+                            Task task = result.getData().getParcelableExtra("task");
+                            homeViewModel.addTask(task);
+                        } else {
+                            Toast.makeText(HomeFragment.this.getContext(), "插入失败了", Toast.LENGTH_SHORT);
+                        }
                     }
+                    //取消了添加
                 }
-                //取消了添加
             });
 
     @Override
@@ -68,7 +73,7 @@ public class HomeFragment extends Fragment implements
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         //数据绑定，部分使用
         binding.setData(homeViewModel);
-        adapter = new TaskListAdapter(homeViewModel);
+        adapter = new TaskListAdapter(homeViewModel,getContext());
         binding.recycleView.setAdapter(adapter);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

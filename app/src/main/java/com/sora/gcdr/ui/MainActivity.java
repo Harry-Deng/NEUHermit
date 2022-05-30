@@ -1,4 +1,4 @@
-package com.sora.gcdr;
+package com.sora.gcdr.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
+import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.ActivityMainBinding;
 
 /**

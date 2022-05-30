@@ -18,7 +18,10 @@
         android:theme="@style/Theme.GoodCalendar"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.SetAlarmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
@@ -28,10 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.home.AddTaskActivity"
+            android:name=".activity.AddTaskActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
-
+        <receiver
+            android:name=".receiver.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -16,27 +16,36 @@ public class Task implements Parcelable {
     int id;
     @ColumnInfo(name = "task_date")
     long date;
+
     @ColumnInfo(name = "task_content")
     String content;
 
-    public Task() {
-    }
-
+    /**
+     * 待办任务的状态, <br>
+     * 0表示已结束 <br>
+     * 1表示未完成,未开启提醒<br>
+     * 2表示未完成,开启提醒<br>
+     */
     @ColumnInfo(name = "task_done")
-    boolean Done;
+    int status;
+
+    public Task() {
+        status=1;
+    }
 
     @Ignore
-    public Task(long date, String content, boolean done) {
+    public Task(long date, String content, int status) {
         this.date = date;
         this.content = content;
-        Done = done;
+        this.status = status;
     }
+
 
     protected Task(Parcel in) {
         id = in.readInt();
         date = in.readLong();
         content = in.readString();
-        Done = in.readByte() != 0;
+        status = in.readInt();
     }
 
     @Override
@@ -44,7 +53,7 @@ public class Task implements Parcelable {
         dest.writeInt(id);
         dest.writeLong(date);
         dest.writeString(content);
-        dest.writeByte((byte) (Done ? 1 : 0));
+        dest.writeInt(status);
     }
 
     @Override
@@ -87,12 +96,11 @@ public class Task implements Parcelable {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public boolean isDone() {
-        return Done;
+    public int getStatus() {
+        return status;
     }
 
-    public void setDone(boolean done) {
-        Done = done;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
