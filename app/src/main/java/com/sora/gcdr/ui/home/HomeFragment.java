@@ -1,11 +1,15 @@
 package com.sora.gcdr.ui.home;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -20,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
+import com.sora.gcdr.db.Task;
 
 import java.util.Objects;
 
@@ -34,12 +39,20 @@ public class HomeFragment extends Fragment implements
     private HomeViewModel homeViewModel;
     private TaskListAdapter adapter;
 
+    //startActivityForResult的替代，等待添加的结果
     ActivityResultLauncher<Intent> intentActivityResultLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-        //回调函数 Parcelable task = result.getData().getParcelableExtra("task");
-
-        //homeViewModel.addTask(task);
-    });
+                //回调函数
+                if (result.getResultCode() == RESULT_OK) {
+                    if (result.getData() != null) {
+                        Task task = result.getData().getParcelableExtra("task");
+                        homeViewModel.addTask(task);
+                    } else {
+                        Toast.makeText(getContext(), "插入失败了", Toast.LENGTH_SHORT);
+                    }
+                }
+                //取消了添加
+            });
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,7 +73,7 @@ public class HomeFragment extends Fragment implements
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //启动时手动触发一次 日期选中事件
-        onCalendarSelect(binding.calendarView.getSelectedCalendar(),true);
+        onCalendarSelect(binding.calendarView.getSelectedCalendar(), true);
         binding.tvCurrentDay.setText(String.valueOf(homeViewModel.getDay()));
 
         //左上角日期点击后触发年视图，函数写在外面
@@ -79,7 +92,7 @@ public class HomeFragment extends Fragment implements
         //右滑删除
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.
                 SimpleCallback(0
-                ,ItemTouchHelper.RIGHT) {
+                , ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,

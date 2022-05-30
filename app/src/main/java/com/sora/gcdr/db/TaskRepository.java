@@ -106,13 +106,13 @@ public class TaskRepository {
 
                     @Override
                     public void onComplete() {
-                        Toast.makeText(MyApplication.getInstance(), "插入成功。", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyApplication.getInstance(), "添加成功。", Toast.LENGTH_SHORT).show();
                         Log.d("sora", "插入成功..");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("sora", "插入失败.." + e.getMessage());
+                        Log.d("sora", "添加失败了.." + e.getMessage());
                     }
                 });
     }

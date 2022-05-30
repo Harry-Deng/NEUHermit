@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.ActivityAddTaskBinding;
 import com.sora.gcdr.db.Task;
-import com.sora.gcdr.db.TaskRepository;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.Calendar;
@@ -58,10 +57,17 @@ public class AddTaskActivity extends AppCompatActivity {
                     binding.editTextContent.getText().toString(),
                     false
             );
-            TaskRepository.getTaskRepository(getContext()).insert(task);
+//            TaskRepository.getTaskRepository(getContext()).insert(task);
+            Intent res = new Intent();
+            res.putExtra("task", task);
+            setResult(RESULT_OK, res);
             finish();
         });
         //点击取消按钮，待办取消
-        binding.buttonCancel.setOnClickListener(v -> finish());
+        binding.buttonCancel.setOnClickListener(
+                v -> {
+                    setResult(RESULT_CANCELED);
+                    finish();
+                });
     }
 }
