@@ -32,4 +32,9 @@
             android:id="@+id/action_addShareFragment_to_easyAppFragment"
             app:destination="@id/shareFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/courseTableFragment"
+        android:name="com.sora.gcdr.ui.course.CourseTableFragment"
+        android:label="fragment_course_table"
+        tools:layout="@layout/fragment_course_table" />
 </navigation>
