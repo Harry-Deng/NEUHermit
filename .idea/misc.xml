@@ -10,8 +10,9 @@
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/ic_baseline_alarm_on_24.xml" value="0.1365" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.1365" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_add_task.xml" value="0.1334853090172239" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_login.xml" value="0.10552536231884058" />
-        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_main.xml" value="0.20697463768115942" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_set_alarm.xml" value="0.16621376811594202" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/cell_share.xml" value="0.1334853090172239" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.1334853090172239" />
@@ -22,6 +23,7 @@
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/fragment_my_info.xml" value="0.264" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/fragment_share.xml" value="0.16621376811594202" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/test.xml" value="0.27447916666666666" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/menu/menu.xml" value="0.21574074074074073" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/drawable-v24/bg_ripple.xml" value="0.1785" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/add_task.xml" value="0.19947916666666668" />
