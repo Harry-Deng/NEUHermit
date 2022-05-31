@@ -88,6 +88,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         binding.buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                task.setContent(binding.textContent.getText().toString());
                 if (binding.switchOpenAlarm.isChecked()) {
                     Intent notifyIntent = new Intent(v.getContext(), NotificationReceiver.class);
                     task.setStatus(2);
