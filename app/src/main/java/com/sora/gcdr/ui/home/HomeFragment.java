@@ -1,9 +1,11 @@
 package com.sora.gcdr.ui.home;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +75,7 @@ public class HomeFragment extends Fragment implements
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         //数据绑定，部分使用
         binding.setData(homeViewModel);
-        adapter = new TaskListAdapter(homeViewModel,getContext());
+        adapter = new TaskListAdapter(homeViewModel, getContext());
         binding.recycleView.setAdapter(adapter);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -108,8 +110,15 @@ public class HomeFragment extends Fragment implements
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                  int direction) {
+
+                Task task = homeViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition());
                 homeViewModel.delete(Objects.requireNonNull(homeViewModel.getDayTaskLive().getValue()).get(viewHolder.getAdapterPosition()));
+                SharedPreferences shp = getContext().getSharedPreferences("alarm", MODE_PRIVATE);
+                SharedPreferences.Editor edit = shp.edit();
+                edit.remove(String.valueOf(task.getId()));
+                edit.apply();
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
             }
         });
         helper.attachToRecyclerView(binding.recycleView);

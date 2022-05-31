@@ -10,6 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 @Dao
 public interface TaskDao {
@@ -27,4 +28,5 @@ public interface TaskDao {
 
     @Query("DELETE FROM T_TASK")
     void deleteAllTasks();
+    
 }
