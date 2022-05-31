@@ -16,20 +16,20 @@
         android:label="fragment_my_info"
         tools:layout="@layout/fragment_my_info" />
     <fragment
-        android:id="@+id/easyAppFragment"
-        android:name="com.sora.gcdr.ui.app.EasyAppFragment"
+        android:id="@+id/shareFragment"
+        android:name="com.sora.gcdr.ui.share.ShareFragment"
         android:label="fragment_easy_app"
-        tools:layout="@layout/fragment_easy_app" >
+        tools:layout="@layout/fragment_share" >
         <action
             android:id="@+id/action_easyAppFragment_to_addShareFragment"
             app:destination="@id/addShareFragment" />
     </fragment>
     <fragment
         android:id="@+id/addShareFragment"
-        android:name="com.sora.gcdr.ui.app.AddShareFragment"
+        android:name="com.sora.gcdr.ui.share.AddShareFragment"
         android:label="AddShareFragment" >
         <action
             android:id="@+id/action_addShareFragment_to_easyAppFragment"
-            app:destination="@id/easyAppFragment" />
+            app:destination="@id/shareFragment" />
     </fragment>
 </navigation>

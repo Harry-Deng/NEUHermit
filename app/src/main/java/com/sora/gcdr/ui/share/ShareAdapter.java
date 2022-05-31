@@ -1,4 +1,4 @@
-package com.sora.gcdr.ui.app;
+package com.sora.gcdr.ui.share;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,28 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sora.gcdr.databinding.CellShareBinding;
-import com.sora.gcdr.databinding.CellTaskBinding;
-import com.sora.gcdr.db.ShareItem;
-import com.sora.gcdr.db.Task;
-import com.sora.gcdr.ui.home.HomeViewModel;
-import com.sora.gcdr.ui.home.TaskListAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.leancloud.LCObject;
 
 public class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareViewHolder> {
-    List<LCObject> shareItems;
-//    private EasyAppViewModel homeViewModel;
-//
-//    public ShareAdapter(EasyAppViewModel homeViewModel) {
-//        this.homeViewModel = homeViewModel;
-//    }
 
-    public void setShareItems(List<LCObject> shareItems) {
-        this.shareItems = shareItems;
+    private ShareViewModel shareViewModel;
+
+    public ShareAdapter(ShareViewModel shareViewModel) {
+        this.shareViewModel = shareViewModel;
     }
+
 
     public static class ShareViewHolder extends RecyclerView.ViewHolder {
         CellShareBinding binding;
@@ -48,9 +37,9 @@ public class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ShareViewHolder holder, int position) {
-        if (shareItems==null)
+        if (shareViewModel.getShareLiveData().getValue()==null)
             return;
-        LCObject shareItem = shareItems.get(position);
+        LCObject shareItem = shareViewModel.getShareLiveData().getValue().get(position);
         String user=  shareItem.getString("user");
         String datetime = shareItem.getUpdatedAtString();
         String content = shareItem.getString("content");
@@ -63,9 +52,9 @@ public class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareViewHol
 
     @Override
     public int getItemCount() {
-        if (shareItems == null)
+        if (shareViewModel.getShareLiveData().getValue() == null)
             return 0;
-        return shareItems.size();
+        return shareViewModel.getShareLiveData().getValue().size();
     }
 
 

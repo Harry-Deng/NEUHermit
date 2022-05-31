@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_baseline_1k_24"
         android:title="日历" />
     <item
-        android:id="@+id/easyAppFragment"
+        android:id="@+id/shareFragment"
         android:icon="@drawable/ic_baseline_2k_24"
-        android:title="应用" />
+        android:title="朋友圈" />
     <item
         android:id="@+id/myInfoFragment"
         android:icon="@drawable/ic_baseline_3k_24"
