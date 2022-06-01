@@ -1,26 +1,18 @@
 package com.sora.gcdr.ui.home;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.activity.SetAlarmActivity;
 import com.sora.gcdr.databinding.CellTaskBinding;
-import com.sora.gcdr.db.Task;
+import com.sora.gcdr.db.task.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.List;

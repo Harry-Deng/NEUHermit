@@ -8,23 +8,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.databinding.ActivitySetAlarmBinding;
-import com.sora.gcdr.db.Task;
-import com.sora.gcdr.db.TaskRepository;
+import com.sora.gcdr.db.task.Task;
+import com.sora.gcdr.db.task.TaskRepository;
 import com.sora.gcdr.receiver.NotificationReceiver;
 import com.sora.gcdr.util.MyUtils;
-
-import java.util.Calendar;
 
 
 /**

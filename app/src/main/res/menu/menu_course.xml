@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_course_import"
+        android:title="导入课表" />
+    <item
+        android:id="@+id/item_set_week"
+        android:title="设置周数" />
+    <item
+        android:id="@+id/item_clear_course"
+        android:title="清空课表" />
+</menu>

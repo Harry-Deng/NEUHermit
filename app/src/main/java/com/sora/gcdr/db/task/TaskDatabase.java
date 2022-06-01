@@ -1,4 +1,4 @@
-package com.sora.gcdr.db;
+package com.sora.gcdr.db.task;
 
 import android.content.Context;
 
@@ -6,9 +6,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Task.class}, version = 1, exportSchema = false)
+import com.sora.gcdr.db.course.Course;
+import com.sora.gcdr.db.course.CourseDao;
+
+@Database(entities = {Task.class, Course.class}, version = 2, exportSchema = false)
 public abstract class TaskDatabase extends RoomDatabase {
     public abstract TaskDao getTaskDao();
+    public abstract CourseDao getCourseDao();
     private static TaskDatabase INSTANCE;
 
     public static TaskDatabase getDatabase(Context context) {
@@ -18,6 +22,7 @@ public abstract class TaskDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     TaskDatabase.class,
                                     "word_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

@@ -1,4 +1,4 @@
-package com.sora.gcdr.db;
+package com.sora.gcdr.db.task;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -28,7 +28,7 @@ import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.sora.gcdr.activity.AddTaskActivity;
 import com.sora.gcdr.databinding.FragmentHomeBinding;
-import com.sora.gcdr.db.Task;
+import com.sora.gcdr.db.task.Task;
 
 import java.util.Objects;
 
