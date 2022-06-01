@@ -8,4 +8,7 @@
     <string name="_d">%d</string>
     <string name="year_month_day_d_d_d">%d-%d-%d</string>
     <string name="hour_minute_d_d">%d:%d</string>
+    <string name="forgetPassword"><u>忘记密码?</u></string>
+    <string name="userServiceAgreement"><u>用户服务协议</u></string>
+    <string name="userPrivacyPolicy"><u>隐私政策</u></string>
 </resources>
