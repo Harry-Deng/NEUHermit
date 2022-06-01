@@ -29,8 +29,7 @@ import android.widget.Toast;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentCourseTableBinding;
-import com.sora.gcdr.db.entity.Course;
-import com.sora.gcdr.db.repo.CourseRepository;
+import com.sora.gcdr.db.course.Course;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -95,6 +94,7 @@ public class CourseTableFragment extends Fragment {
             @Override
             public void onChanged(Integer integer) {
                 mViewModel.getCourseList().removeObservers(getViewLifecycleOwner());
+
                 mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
                     @Override
                     public void onChanged(List<Course> courses) {

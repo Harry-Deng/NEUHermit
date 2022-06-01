@@ -18,6 +18,12 @@
         android:theme="@style/Theme.GoodCalendar"
         tools:targetApi="31">
         <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SetAlarmActivity"
             android:exported="false" />
         <activity

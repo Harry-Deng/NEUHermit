@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.sora.gcdr.db.entity.Course;
-import com.sora.gcdr.db.repo.CourseRepository;
+import com.sora.gcdr.db.course.Course;
+import com.sora.gcdr.db.course.CourseRepository;
 
 import java.util.List;
 
