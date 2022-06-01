@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.sora.gcdr.db.task.Task;
-import com.sora.gcdr.db.task.TaskRepository;
+import com.sora.gcdr.db.entity.Task;
+import com.sora.gcdr.db.repo.TaskRepository;
 
 import java.util.List;
 

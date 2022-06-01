@@ -12,8 +12,8 @@ import android.content.SharedPreferences;
 import androidx.core.app.NotificationCompat;
 
 import com.sora.gcdr.R;
-import com.sora.gcdr.db.task.Task;
-import com.sora.gcdr.db.task.TaskRepository;
+import com.sora.gcdr.db.entity.Task;
+import com.sora.gcdr.db.repo.TaskRepository;
 import com.sora.gcdr.ui.MainActivity;
 
 public class NotificationReceiver extends BroadcastReceiver {

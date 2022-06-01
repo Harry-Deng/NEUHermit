@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sora.gcdr.databinding.CellCourseBinding;
 import com.sora.gcdr.databinding.CourseDetailBinding;
-import com.sora.gcdr.db.course.Course;
+import com.sora.gcdr.db.entity.Course;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,13 @@
-package com.sora.gcdr.db.course;
+package com.sora.gcdr.db.repo;
 
 import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.sora.gcdr.db.task.TaskDatabase;
+import com.sora.gcdr.db.dao.CourseDao;
+import com.sora.gcdr.db.entity.Course;
+import com.sora.gcdr.db.CalendarDatabase;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class CourseRepository {
     private final CourseDao dao;
 
     private CourseRepository(Context context) {
-        TaskDatabase db = TaskDatabase.getDatabase(context);
+        CalendarDatabase db = CalendarDatabase.getDatabase(context);
         this.dao = db.getCourseDao();
         this.courseListLive = dao.getAllCourses();
     }

@@ -3,19 +3,20 @@ package com.sora.gcdr.ui.course;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +25,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentCourseTableBinding;
-import com.sora.gcdr.db.course.Course;
-import com.sora.gcdr.db.course.CourseRepository;
+import com.sora.gcdr.db.entity.Course;
+import com.sora.gcdr.db.repo.CourseRepository;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -46,10 +48,8 @@ public class CourseTableFragment extends Fragment {
 
     private CourseTableViewModel mViewModel;
     private FragmentCourseTableBinding binding;
-
     ContentResolver resolver;
     CourseListAdapter adapter;
-    CourseRepository repository;
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
@@ -65,6 +65,7 @@ public class CourseTableFragment extends Fragment {
                     }
                 }
             });
+
     public static CourseTableFragment newInstance() {
         return new CourseTableFragment();
     }
@@ -82,6 +83,7 @@ public class CourseTableFragment extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
 
+        mViewModel = new ViewModelProvider(requireActivity()).get(CourseTableViewModel.class);
 
         adapter = new CourseListAdapter();
         binding.recyclerview.setLayoutManager(new GridLayoutManager(requireActivity(), 8));
@@ -89,11 +91,32 @@ public class CourseTableFragment extends Fragment {
 
         binding.recyclerview.addItemDecoration(new GridDivider(requireActivity()));
 
-        repository = CourseRepository.getTaskRepository(requireActivity());
-        repository.getCourseListLive().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
+        mViewModel.getCurrentWeek().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+
+            }
+        });
+
+        mViewModel.getCurrentWeek().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                mViewModel.getCourseList().removeObservers(getViewLifecycleOwner());
+                mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
+                    @Override
+                    public void onChanged(List<Course> courses) {
+                        List<Course> courseList = CustomReSort(courses, mViewModel.currentWeek.getValue());
+                        adapter.setCourseList(courseList);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+
+        mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                List<Course> courseList = CustomReSort(courses,15);
+                List<Course> courseList = CustomReSort(courses, mViewModel.currentWeek.getValue());
                 adapter.setCourseList(courseList);
                 adapter.notifyDataSetChanged();
             }
@@ -115,6 +138,8 @@ public class CourseTableFragment extends Fragment {
                 mGetContent.launch("*/*");
                 break;
             case R.id.item_set_week:
+                showList();
+
                 break;
             case R.id.item_clear_course:
                 break;
@@ -122,16 +147,49 @@ public class CourseTableFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Course> CustomReSort(List<Course> courses,int week) {
+    private List<Course> CustomReSort(List<Course> courses, int week) {
         List<Course> courseList = Arrays.asList(new Course[96]);
         for (Course course : courses) {
             //只要第五周有课的
             if (course.contains(week)) {
-                int loc = course.getX() + (course.getY()-1)*8;
+                int loc = course.getX() + (course.getY() - 1) * 8;
                 courseList.set(loc, course);
             }
         }
         return courseList;
+    }
+
+    private void showList() {
+        //默认选中的item
+        final String[] items = {
+                "第一周", "第二周", "第三周", "第四周", "第五周", "第六周", "第七周",
+                "第八周", "第九周", "第十周", "第十一周", "第十二周", "第十三周", "第十四周",
+                "第十五周", "第十六周", "第十七周"
+        };
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(requireActivity())
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle("选择周")
+                .setCancelable(false)
+                .setSingleChoiceItems(items, mViewModel.getCurrentWeek().getValue() - 1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mViewModel.getCurrentWeek().setValue(i + 1);
+                    }
+                });
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        adapter.setCourseList();
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.create().show();
     }
 
     public void excelToCourse(InputStream inputStream) {
@@ -232,7 +290,7 @@ public class CourseTableFragment extends Fragment {
                             course.getLocation() + "," +
                             course.getWhichWeek()
                     );
-                    repository.insert(course);
+                    mViewModel.insert(course);
                 }
             }
 //            Log.d("shiro", "onClick: " + coursesList.size());

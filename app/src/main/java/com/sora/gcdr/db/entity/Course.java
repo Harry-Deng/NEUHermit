@@ -1,4 +1,4 @@
-package com.sora.gcdr.db.course;
+package com.sora.gcdr.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

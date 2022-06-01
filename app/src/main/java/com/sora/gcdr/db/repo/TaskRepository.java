@@ -1,4 +1,4 @@
-package com.sora.gcdr.db.task;
+package com.sora.gcdr.db.repo;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 
 import com.sora.gcdr.MyApplication;
+import com.sora.gcdr.db.CalendarDatabase;
+import com.sora.gcdr.db.dao.TaskDao;
+import com.sora.gcdr.db.entity.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.List;
@@ -22,13 +25,13 @@ public class TaskRepository {
     private final TaskDao taskDao;
 
     private TaskRepository(Context context) {
-        TaskDatabase db = TaskDatabase.getDatabase(context);
+        CalendarDatabase db = CalendarDatabase.getDatabase(context);
         this.taskDao = db.getTaskDao();
         this.dayTasksLive = taskDao.getTaskByTime(0, 0);
     }
 
     public static TaskRepository getTaskRepository(Context context) {
-        synchronized (TaskDatabase.class) {
+        synchronized (CalendarDatabase.class) {
             if (INSTANCE == null) {
                 INSTANCE = new TaskRepository(context);
             }

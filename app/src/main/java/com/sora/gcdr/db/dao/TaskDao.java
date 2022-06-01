@@ -1,4 +1,4 @@
-package com.sora.gcdr.db.task;
+package com.sora.gcdr.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.sora.gcdr.db.entity.Task;
 
 import java.util.List;
 
