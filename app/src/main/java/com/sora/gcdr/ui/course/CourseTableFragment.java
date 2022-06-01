@@ -94,13 +94,6 @@ public class CourseTableFragment extends Fragment {
         mViewModel.getCurrentWeek().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-
-            }
-        });
-
-        mViewModel.getCurrentWeek().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
                 mViewModel.getCourseList().removeObservers(getViewLifecycleOwner());
                 mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
                     @Override
@@ -112,15 +105,14 @@ public class CourseTableFragment extends Fragment {
                 });
             }
         });
-
-        mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
-            @Override
-            public void onChanged(List<Course> courses) {
-                List<Course> courseList = CustomReSort(courses, mViewModel.currentWeek.getValue());
-                adapter.setCourseList(courseList);
-                adapter.notifyDataSetChanged();
-            }
-        });
+//        mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
+//            @Override
+//            public void onChanged(List<Course> courses) {
+//                List<Course> courseList = CustomReSort(courses, mViewModel.currentWeek.getValue());
+//                adapter.setCourseList(courseList);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 
         resolver = requireActivity().getContentResolver();
     }
@@ -139,9 +131,9 @@ public class CourseTableFragment extends Fragment {
                 break;
             case R.id.item_set_week:
                 showList();
-
                 break;
             case R.id.item_clear_course:
+                mViewModel.clearCourses();
                 break;
         }
         return super.onOptionsItemSelected(item);

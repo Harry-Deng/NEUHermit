@@ -59,5 +59,25 @@ public class CourseRepository {
                     }
                 });
     }
+    public void clear(Course... courses) {
+        dao.clearAllCourses()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("sora", "清空全部..");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("sora", "添加失败了.." + e.getMessage());
+                    }
+                });
+    }
 
 }

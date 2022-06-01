@@ -36,4 +36,8 @@ public class CourseTableViewModel extends AndroidViewModel {
     public void insert(Course course) {
         repository.insert(course);
     }
+
+    public void clearCourses() {
+        repository.clear();
+    }
 }
