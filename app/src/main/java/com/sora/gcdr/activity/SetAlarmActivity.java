@@ -14,8 +14,8 @@ import android.widget.CompoundButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sora.gcdr.databinding.ActivitySetAlarmBinding;
-import com.sora.gcdr.db.entity.Task;
-import com.sora.gcdr.db.repo.TaskRepository;
+import com.sora.gcdr.db.task.Task;
+import com.sora.gcdr.db.task.TaskRepository;
 import com.sora.gcdr.receiver.NotificationReceiver;
 import com.sora.gcdr.util.MyUtils;
 

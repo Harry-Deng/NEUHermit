@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.ActivityAddTaskBinding;
-import com.sora.gcdr.db.entity.Task;
+import com.sora.gcdr.db.task.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.Calendar;

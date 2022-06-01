@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sora.gcdr.activity.SetAlarmActivity;
 import com.sora.gcdr.databinding.CellTaskBinding;
-import com.sora.gcdr.db.entity.Task;
+import com.sora.gcdr.db.task.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.List;
