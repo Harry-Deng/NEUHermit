@@ -8,25 +8,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.sora.gcdr.R;
-import com.sora.gcdr.db.Task;
-import com.sora.gcdr.db.TaskRepository;
+import com.sora.gcdr.db.entity.Task;
+import com.sora.gcdr.db.repo.TaskRepository;
 import com.sora.gcdr.ui.MainActivity;
-
-import org.reactivestreams.Subscription;
-
-import io.reactivex.CompletableObserver;
-import io.reactivex.FlowableSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class NotificationReceiver extends BroadcastReceiver {
     private NotificationManager mNotificationManager;

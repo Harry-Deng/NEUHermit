@@ -1,7 +1,39 @@
 package com.sora.gcdr.ui.course;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class CourseTableViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.sora.gcdr.db.entity.Course;
+import com.sora.gcdr.db.repo.CourseRepository;
+
+import java.util.List;
+
+public class CourseTableViewModel extends AndroidViewModel {
+    MutableLiveData<Integer> currentWeek;
+    CourseRepository repository;
+
+
+
+    public CourseTableViewModel(@NonNull Application application) {
+        super(application);
+        repository = CourseRepository.getTaskRepository(application);
+        currentWeek = new MutableLiveData<>();
+        currentWeek.setValue(1);
+    }
+
+    public MutableLiveData<Integer> getCurrentWeek() {
+        return currentWeek;
+    }
+
+    public LiveData<List<Course>> getCourseList() {
+        return repository.getCourseListLive();
+    }
+
+    public void insert(Course course) {
+        repository.insert(course);
+    }
 }

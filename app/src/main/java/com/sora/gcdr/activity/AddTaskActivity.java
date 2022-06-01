@@ -1,7 +1,5 @@
 package com.sora.gcdr.activity;
 
-import static cn.leancloud.LeanCloud.getContext;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -12,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.ActivityAddTaskBinding;
-import com.sora.gcdr.db.Task;
+import com.sora.gcdr.db.entity.Task;
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.Calendar;
