@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_baseline_1k_24"
+        android:icon="@drawable/calendar_logo_style"
         android:title="日历" />
     <item
         android:id="@+id/courseTableFragment"
-        android:icon="@drawable/ic_baseline_table_chart_24"
+        android:icon="@drawable/schedule_logo_style"
         android:title="课表" />
     <item
         android:id="@+id/shareFragment"
-        android:icon="@drawable/ic_baseline_2k_24"
+        android:icon="@drawable/space_logo_style"
         android:title="朋友圈" />
     <item
         android:id="@+id/myInfoFragment"
-        android:icon="@drawable/ic_baseline_3k_24"
+        android:icon="@drawable/user_logo_style"
         android:title="我的" />
 </menu>

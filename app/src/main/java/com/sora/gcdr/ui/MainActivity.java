@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
+        binding.bottomNavigationView.setItemIconTintList(null);
     }
 
 }
