@@ -1,5 +1,7 @@
 package com.sora.gcdr.ui.share;
 
+import android.annotation.SuppressLint;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -11,56 +13,56 @@ import cn.leancloud.LCQuery;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ShareViewModel extends ViewModel {
     private MutableLiveData<List<LCObject>> shareLiveData;
+    private static final int PAGE_SIZE = 5;
     private static int skip = 0;
     LCQuery<LCObject> query;
+
     public ShareViewModel() {
-        this.shareLiveData =new MutableLiveData<>();
+        this.shareLiveData = new MutableLiveData<>();
         shareLiveData.setValue(new ArrayList<>());
         query = new LCQuery<>("share");
-
-        getMoreShare();
+        updateShare();
     }
 
     public MutableLiveData<List<LCObject>> getShareLiveData() {
         return shareLiveData;
     }
 
-    public void getMoreShare() {
 
-
-        query
-//                .skip(skip)
-//                .limit(5)
+    @SuppressLint("CheckResult")
+    public void updateShare() {
+        query.orderByDescending(LCObject.KEY_UPDATED_AT)
+                .skip(0)
+                .limit(PAGE_SIZE)
                 .findInBackground()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<LCObject>>() {
+                .subscribe(new Consumer<List<LCObject>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<LCObject> lcObjects) {
-                        skip += 5;
-//                        shareLiveData.getValue().addAll(lcObjects);
-                        shareLiveData.setValue(lcObjects);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                    public void accept(List<LCObject> lcObjects) throws Exception {
+                        skip = 0;
+                        if (lcObjects != null)
+                            shareLiveData.setValue(lcObjects);
                     }
                 });
     }
 
+    @SuppressLint("CheckResult")
+    public void getMoreShare() {
+        query.orderByDescending(LCObject.KEY_UPDATED_AT)
+                .skip(skip)
+                .limit(PAGE_SIZE)
+                .findInBackground()
+                .subscribe(new Consumer<List<LCObject>>() {
+                    @Override
+                    public void accept(List<LCObject> lcObjects) throws Exception {
+                        skip += PAGE_SIZE;
+                        if (lcObjects != null)
+                            shareLiveData.getValue().addAll(lcObjects);
+                    }
+                });
+    }
 }

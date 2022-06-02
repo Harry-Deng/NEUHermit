@@ -1,12 +1,19 @@
 package com.sora.gcdr.ui.share;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.sora.gcdr.MyApplication;
+import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.CellShareBinding;
+import com.sora.gcdr.db.User;
+import com.sora.gcdr.util.MyUtils;
 
 import cn.leancloud.LCObject;
 
@@ -21,6 +28,7 @@ public class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareViewHol
 
     public static class ShareViewHolder extends RecyclerView.ViewHolder {
         CellShareBinding binding;
+
         public ShareViewHolder(CellShareBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -37,17 +45,26 @@ public class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ShareViewHolder holder, int position) {
-        if (shareViewModel.getShareLiveData().getValue()==null)
+        if (shareViewModel.getShareLiveData().getValue() == null)
             return;
         LCObject shareItem = shareViewModel.getShareLiveData().getValue().get(position);
-        String user=  shareItem.getString("user");
-        String datetime = shareItem.getUpdatedAtString();
+        String nickname = shareItem.getString("nickname");
+        String datetime = MyUtils.getDateTimeByLong(shareItem.getUpdatedAt().getTime());
         String content = shareItem.getString("content");
+        String image = shareItem.getString("qqNumber");
 
-        holder.binding.username.setText(user);;
-        holder.binding.datetime.setText(datetime);;
-        holder.binding.content.setText(content);;
+        holder.binding.nickName.setText(nickname);
 
+        holder.binding.datetime.setText(datetime);
+
+        holder.binding.content.setText(content);
+
+        Glide.with(holder.itemView)
+                .load("https://q4.qlogo.cn/g?b=qq&nk=" + image + "&s=100")
+                .fitCenter()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.default_avater)
+                .into(holder.binding.image);
     }
 
     @Override

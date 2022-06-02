@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentShareBinding;
 
@@ -53,7 +56,27 @@ public class ShareFragment extends Fragment {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //未登录
+                if ("".equals(MyApplication.getInstance().getUser().getUsername() )) {
+                    Toast.makeText(MyApplication.getInstance(), "只有登录才能发布动态..", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Navigation.findNavController(v).navigate(R.id.action_easyAppFragment_to_addShareFragment);
+            }
+        });
+
+        binding.getmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.getMoreShare();
+            }
+        });
+
+        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.updateShare();
+                binding.swipeRefresh.setRefreshing(false);
             }
         });
 

@@ -57,6 +57,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         holder.binding.textViewDone.setText(String.valueOf(task.getStatus()));
 
+
+
         //长按调出添加提醒的对话框，不再提供修改日程内容的接口
         holder.itemView.setOnLongClickListener(v -> {
             Intent intent = new Intent(v.getContext(), SetAlarmActivity.class);

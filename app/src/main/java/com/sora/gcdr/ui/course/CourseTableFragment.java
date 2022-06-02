@@ -105,14 +105,6 @@ public class CourseTableFragment extends Fragment {
                 });
             }
         });
-//        mViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
-//            @Override
-//            public void onChanged(List<Course> courses) {
-//                List<Course> courseList = CustomReSort(courses, mViewModel.currentWeek.getValue());
-//                adapter.setCourseList(courseList);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
 
         resolver = requireActivity().getContentResolver();
     }

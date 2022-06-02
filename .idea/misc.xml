@@ -19,7 +19,8 @@
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/add_task.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_course.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_share.xml" value="0.19947916666666668" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.1" />
+        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.11944444444444445" />
+        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/course_detail.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_share.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_share2.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_task.xml" value="0.25" />
@@ -28,6 +29,8 @@
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_home.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_my_info.xml" value="0.18489583333333334" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_share.xml" value="0.1" />
+        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/input_number_layout.xml" value="0.19947916666666668" />
+        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/layout.xml" value="0.18489583333333334" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/update_task.xml" value="0.1984375" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/menu/menu_course.xml" value="0.19947916666666668" />

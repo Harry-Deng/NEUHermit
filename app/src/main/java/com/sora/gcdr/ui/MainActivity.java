@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
         navController = hostFragment.getNavController();
 
-
-
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
         binding.bottomNavigationView.setItemIconTintList(null);

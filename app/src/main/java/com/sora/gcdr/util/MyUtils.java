@@ -33,6 +33,10 @@ public class MyUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd", Locale.CHINA);
         return sdf.format(new Date(date));
     }
+    public static String getDateTimeByLong(long date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.CHINA);
+        return sdf.format(new Date(date));
+    }
 
     public static long timeToLong(String datetime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm", Locale.CHINA);
