@@ -39,7 +39,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/textContent"
+                android:id="@+id/textSlogan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -49,6 +49,12 @@
                 android:minLines="1"
                 android:scrollbars="vertical"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

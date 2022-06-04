@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="2dp"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textViewId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="2"
-            android:text="9"
-            android:textAlignment="viewStart"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/textViewTime"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="64dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:button="@drawable/check_box_style"
+            android:checked="false"
+            android:minWidth="48dp"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <TextView
-            android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="3"
-            android:text="14:46"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textViewId"
-            app:layout_constraintEnd_toStartOf="@+id/textViewDone"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewId" />
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewDone"
-            app:layout_constraintStart_toStartOf="@+id/textViewId"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTime"
-            tools:text="content" />
+            <TextView
+                android:id="@+id/textViewContent"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="5dp"
+                android:gravity="bottom"
+                android:maxLines="2"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="content" />
 
-        <TextView
-            android:id="@+id/textViewDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="done"
-            android:textSize="20sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textViewTime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewTime" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewTime"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginBottom="5dp"
+                android:ems="3"
+                android:gravity="center"
+                android:text="14:46"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageViewAlarm"
+            android:layout_width="52dp"
+            android:layout_height="74dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/alarm" />
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>
+

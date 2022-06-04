@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable-v24/check_box_style.xml" value="0.1365" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/calendar_logo_style.xml" value="0.1365" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/schedule_logo_style.xml" value="0.1365" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/space_logo_style.xml" value="0.1885" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/textarea_style.xml" value="0.2155" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/drawable/user_logo_style.xml" value="0.1365" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout-v28/cell_task.xml" value="0.15534420289855072" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_add_task.xml" value="0.4" />
         <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_main.xml" value="0.1743659420289855" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_set_alarm.xml" value="0.4" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/activity_sign_in.xml" value="0.15534420289855072" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.536" />
+        <entry key="..\:/GitHub/GoodCalendar/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/drawable-v24/bg_ripple.xml" value="0.1785" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/drawable/calendar_logo_style.xml" value="0.1" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/drawable/schedule_logo_style.xml" value="0.1" />
@@ -14,13 +26,11 @@
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/activity_login.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/activity_set_alarm.xml" value="0.19947916666666668" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/activity_sign_in.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/add_share.xml" value="0.18489583333333334" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/add_task.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_course.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_share.xml" value="0.19947916666666668" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.11944444444444445" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/course_detail.xml" value="0.19947916666666668" />
+        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/cell_task.xml" value="0.1" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_share.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_share2.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_add_task.xml" value="0.25" />
@@ -29,8 +39,6 @@
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_home.xml" value="0.19947916666666668" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_my_info.xml" value="0.18489583333333334" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/fragment_share.xml" value="0.1" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/input_number_layout.xml" value="0.19947916666666668" />
-        <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/layout.xml" value="0.18489583333333334" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/layout/update_task.xml" value="0.1984375" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/temp/GoodCalendar/app/src/main/res/menu/menu_course.xml" value="0.19947916666666668" />

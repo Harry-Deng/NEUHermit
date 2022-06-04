@@ -11,14 +11,19 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "t_task",
 indices = {@Index("task_date")})
-public class Task implements Parcelable {
+public class
+
+Task implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     int id;
     @ColumnInfo(name = "task_date")
     long date;
 
-    @ColumnInfo(name = "task_content")
-    String content;
+    @ColumnInfo(name = "task_slogan")
+    String slogan;
+
+    @ColumnInfo(name = "task_remark")
+    String remark;
 
     /**
      * 待办任务的状态, <br>
@@ -34,9 +39,10 @@ public class Task implements Parcelable {
     }
 
     @Ignore
-    public Task(long date, String content, int status) {
+    public Task(long date, String slogan, String remark, int status) {
         this.date = date;
-        this.content = content;
+        this.slogan = slogan;
+        this.remark = remark;
         this.status = status;
     }
 
@@ -44,7 +50,8 @@ public class Task implements Parcelable {
     protected Task(Parcel in) {
         id = in.readInt();
         date = in.readLong();
-        content = in.readString();
+        slogan = in.readString();
+        remark = in.readString();
         status = in.readInt();
     }
 
@@ -52,7 +59,8 @@ public class Task implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeLong(date);
-        dest.writeString(content);
+        dest.writeString(slogan);
+        dest.writeString(remark);
         dest.writeInt(status);
     }
 
@@ -89,12 +97,20 @@ public class Task implements Parcelable {
         this.date = date;
     }
 
-    public String getContent() {
-        return content;
+    public String getSlogan() {
+        return slogan;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setSlogan(String slogan) {
+        this.slogan = this.slogan;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public int getStatus() {

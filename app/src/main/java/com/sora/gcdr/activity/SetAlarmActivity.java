@@ -47,7 +47,8 @@ public class SetAlarmActivity extends AppCompatActivity {
         task = intent.getParcelableExtra("task");
         binding.textViewDate.setText(MyUtils.getDateByLong(task.getDate()));
         binding.textViewTime.setText(MyUtils.getTimeByLong(task.getDate()));
-        binding.textContent.setText(task.getContent());
+        binding.textSlogan.setText(task.getSlogan());
+        binding.textRemark.setText(task.getRemark());
 
         if (task.getStatus() == 2) {
             binding.switchOpenAlarm.setChecked(true);
@@ -81,7 +82,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         binding.buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.setContent(binding.textContent.getText().toString());
+                task.setSlogan(binding.textSlogan.getText().toString());
                 if (binding.switchOpenAlarm.isChecked()) {
                     Intent notifyIntent = new Intent(v.getContext(), NotificationReceiver.class);
                     task.setStatus(2);

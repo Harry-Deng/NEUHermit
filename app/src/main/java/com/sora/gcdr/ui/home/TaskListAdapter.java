@@ -2,6 +2,7 @@ package com.sora.gcdr.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,13 +50,16 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             return;
         }
         Task task = value.get(position);
-        holder.binding.textViewId.setText(String.valueOf(position + 1));
         holder.binding.textViewTime.setText(MyUtils.getTimeByLong(task.getDate()));
-        holder.binding.textViewContent.setText(task.getContent());
+        holder.binding.textViewTime.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        holder.binding.textViewTime.setTextSize(14);
 
-        holder.binding.textViewContent.setVisibility(TextUtils.isEmpty(task.getContent()) ? View.GONE : View.VISIBLE);
+        holder.binding.textViewContent.setText(task.getSlogan());
+        holder.binding.textViewContent.setTypeface(Typeface.DEFAULT_BOLD);
+        holder.binding.textViewContent.setTextSize(24);
 
-        holder.binding.textViewDone.setText(String.valueOf(task.getStatus()));
+        holder.binding.textViewContent.setVisibility(TextUtils.isEmpty(task.getSlogan()) ? View.GONE : View.VISIBLE);
+
 
 
 

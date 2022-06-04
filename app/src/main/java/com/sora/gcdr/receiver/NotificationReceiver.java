@@ -69,7 +69,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 (context, PRIMARY_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_baseline_alarm_on_24)
                 .setContentTitle("定的闹钟时间到了。。。")
-                .setContentText(task.getContent())
+                .setContentText(task.getSlogan())
                 .setContentIntent(contentPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)

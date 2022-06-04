@@ -52,7 +52,8 @@ public class AddTaskActivity extends AppCompatActivity {
                     binding.textViewDate.getText().toString() + " " + binding.textViewTime.getText().toString();
             Task task = new Task(
                     MyUtils.timeToLong(datetime),
-                    binding.editTextContent.getText().toString(),
+                    binding.editTextSlogan.getText().toString(),
+                    binding.editTextRemark.getText().toString(),
                     1
             );
 //            TaskRepository.getTaskRepository(getContext()).insert(task);
