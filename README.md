@@ -20,4 +20,19 @@ Functions
 Usage
 ----
 Due to [restrictions of app registration regulations](https://www.gov.cn/zhengce/zhengceku/202308/content_6897341.htm), I am unable to provide the APK, so to use this application, users need to download the Project themselves and import it to their phones via Android Studio.
+Please follow the standard procedure to download and unzip the project to any directory on your computer, then open the project through Android Studio. Select either a virtual device or an actual physical device as the target to install this application.
+
+Development Version
+----
+- Java VERSION1.8
+- Android 12.0(S)
+- API 31
+  
+test devices
+----
+- Mi Phone 10 Standard Version
+- Android 12
+- SDK 31
+
+***
 ![image](https://github.com/Harry-Deng/GoodCalendar/assets/72896380/78985eea-d511-488b-901d-997c2dea87e4)
