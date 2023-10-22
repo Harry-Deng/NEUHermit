@@ -20,15 +20,16 @@ Functions
 Usage
 ----
 Due to [restrictions of app registration regulations](https://www.gov.cn/zhengce/zhengceku/202308/content_6897341.htm), I am unable to provide the APK, so to use this application, users need to download the Project themselves and import it to their phones via Android Studio.
+  
 Please follow the standard procedure to download and unzip the project to any directory on your computer, then open the project through Android Studio. Select either a virtual device or an actual physical device as the target to install this application.
 
-Development Version
+Development
 ----
-- Java VERSION1.8
+- Java version 1.8
 - Android 12.0(S)
 - API 31
   
-test devices
+Physical test devices
 ----
 - Mi Phone 10 Standard Version
 - Android 12
