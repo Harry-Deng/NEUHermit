@@ -1,17 +1,12 @@
 package com.sora.gcdr.ui;
 
-import static android.graphics.Color.*;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.ActivityMainBinding;

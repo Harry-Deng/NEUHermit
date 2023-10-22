@@ -110,7 +110,6 @@ public class HomeFragment extends Fragment implements
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                  int direction) {
-
                 Task task = homeViewModel.getDayTaskLive().getValue().get(viewHolder.getAdapterPosition());
                 homeViewModel.delete(Objects.requireNonNull(homeViewModel.getDayTaskLive().getValue()).get(viewHolder.getAdapterPosition()));
                 SharedPreferences shp = getContext().getSharedPreferences("alarm", MODE_PRIVATE);

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.share.ShareFragment" >
+    android:background="@drawable/space_background"
+    tools:context=".ui.share.ShareFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -34,7 +35,9 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:contentDescription="@string/buttonOK"
-        android:src="@android:drawable/ic_input_add"
+        android:src="@drawable/add"
+        android:tint="@color/white"
+        app:backgroundTint="#AEA2F1"
         app:layout_constraintBottom_toTopOf="@+id/getmore"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -45,8 +48,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
-        android:contentDescription="@string/_d"
-        android:src="@drawable/ic_baseline_expand_more_24"
+        android:src="@drawable/more"
+        android:tint="@color/white"
+        app:backgroundTint="#AEA2F1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

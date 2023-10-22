@@ -14,7 +14,11 @@
         android:id="@+id/myInfoFragment"
         android:name="com.sora.gcdr.ui.me.MyInfoFragment"
         android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info" />
+        tools:layout="@layout/fragment_my_info" >
+        <action
+            android:id="@+id/action_myInfoFragment_to_mySpaceFragment"
+            app:destination="@id/mySpaceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.sora.gcdr.ui.share.ShareFragment"
@@ -37,4 +41,13 @@
         android:name="com.sora.gcdr.ui.course.CourseTableFragment"
         android:label="fragment_course_table"
         tools:layout="@layout/fragment_course_table" />
+    <fragment
+        android:id="@+id/mySpaceFragment"
+        android:name="com.sora.gcdr.ui.me.MySpaceFragment"
+        android:label="fragment_my_space"
+        tools:layout="@layout/fragment_my_space" >
+        <action
+            android:id="@+id/action_mySpaceFragment_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+    </fragment>
 </navigation>

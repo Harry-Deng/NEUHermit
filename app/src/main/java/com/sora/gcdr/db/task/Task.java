@@ -11,9 +11,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "t_task",
 indices = {@Index("task_date")})
-public class
-
-Task implements Parcelable {
+public class Task implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     int id;
     @ColumnInfo(name = "task_date")
@@ -25,19 +23,12 @@ Task implements Parcelable {
     @ColumnInfo(name = "task_remark")
     String remark;
 
-    /**
-     * 待办任务的状态, <br>
-     * 0表示已结束 <br>
-     * 1表示未完成,未开启提醒<br>
-     * 2表示未完成,开启提醒<br>
-     */
     @ColumnInfo(name = "task_done")
     int status;
 
     public Task() {
         status=1;
     }
-
     @Ignore
     public Task(long date, String slogan, String remark, int status) {
         this.date = date;
@@ -46,6 +37,21 @@ Task implements Parcelable {
         this.status = status;
     }
 
+    public String getSlogan() {
+        return slogan;
+    }
+
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     protected Task(Parcel in) {
         id = in.readInt();
@@ -97,21 +103,6 @@ Task implements Parcelable {
         this.date = date;
     }
 
-    public String getSlogan() {
-        return slogan;
-    }
-
-    public void setSlogan(String slogan) {
-        this.slogan = this.slogan;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 
     public int getStatus() {
         return status;

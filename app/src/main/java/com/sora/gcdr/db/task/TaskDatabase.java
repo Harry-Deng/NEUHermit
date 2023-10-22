@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.sora.gcdr.db.course.Course;
 import com.sora.gcdr.db.course.CourseDao;
 
-@Database(entities = {Task.class, Course.class}, version = 4, exportSchema = false)
+@Database(entities = {Task.class, Course.class}, version = 1, exportSchema = false)
 public abstract class TaskDatabase extends RoomDatabase {
     public abstract TaskDao getTaskDao();
     public abstract CourseDao getCourseDao();

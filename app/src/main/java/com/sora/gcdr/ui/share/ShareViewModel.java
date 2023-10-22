@@ -5,16 +5,14 @@ import android.annotation.SuppressLint;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.sora.gcdr.MyApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.leancloud.LCObject;
 import cn.leancloud.LCQuery;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class ShareViewModel extends ViewModel {
     private MutableLiveData<List<LCObject>> shareLiveData;
@@ -26,7 +24,6 @@ public class ShareViewModel extends ViewModel {
         this.shareLiveData = new MutableLiveData<>();
         shareLiveData.setValue(new ArrayList<>());
         query = new LCQuery<>("share");
-        updateShare();
     }
 
     public MutableLiveData<List<LCObject>> getShareLiveData() {
@@ -49,6 +46,22 @@ public class ShareViewModel extends ViewModel {
                     }
                 });
     }
+
+    @SuppressLint("CheckResult")
+    public void getMyShare() {
+        query.orderByDescending(LCObject.KEY_UPDATED_AT)
+                .whereEqualTo("username", MyApplication.getInstance().getUser().getUsername())
+                .findInBackground()
+                .subscribe(new Consumer<List<LCObject>>() {
+                    @Override
+                    public void accept(List<LCObject> lcObjects) throws Exception {
+                        skip = 0;
+                        if (lcObjects != null)
+                            shareLiveData.setValue(lcObjects);
+                    }
+                });
+    }
+
 
     @SuppressLint("CheckResult")
     public void getMoreShare() {

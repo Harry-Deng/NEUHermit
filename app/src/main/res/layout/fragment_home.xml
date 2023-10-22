@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -27,12 +25,12 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#FFDA46"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/img_add"
-            app:backgroundTint="#FFDA46"
+            android:contentDescription="add"
+            android:tint="@color/white"
+            app:backgroundTint="#AEA2F1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -154,7 +152,7 @@
                     app:scheme_theme_color="#128c4b"
                     app:selected_lunar_text_color="#fff"
                     app:selected_text_color="#fff"
-                    app:selected_theme_color="#FFDA46"
+                    app:selected_theme_color="#60917FFB"
                     app:week_background="#fff"
                     app:week_start_with="sun"
                     app:week_text_color="#e1e1e1"
@@ -162,9 +160,9 @@
                     app:year_view="com.sora.gcdr.outer.CustomYearView"
                     app:year_view_day_text_color="#333333"
                     app:year_view_day_text_size="7sp"
-                    app:year_view_month_text_color="#DAA520"
+                    app:year_view_month_text_color="#60917FFB"
                     app:year_view_month_text_size="20sp"
-                    app:year_view_scheme_color="#f17706"
+                    app:year_view_scheme_color="#D4CBFA"
                     app:year_view_select_text_color="#fff"
                     app:year_view_week_height="12dp"
                     app:year_view_week_text_color="#e1e1e1"
@@ -176,7 +174,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/calender_background" />
             </com.haibin.calendarview.CalendarLayout>
 
 

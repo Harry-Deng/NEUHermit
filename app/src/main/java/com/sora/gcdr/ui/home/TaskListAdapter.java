@@ -2,11 +2,11 @@ package com.sora.gcdr.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.text.TextUtils;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,17 +50,33 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             return;
         }
         Task task = value.get(position);
+//        holder.binding.textViewId.setText(String.valueOf(position + 1));
         holder.binding.textViewTime.setText(MyUtils.getTimeByLong(task.getDate()));
-        holder.binding.textViewTime.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        holder.binding.textViewTime.setTextSize(14);
 
-        holder.binding.textViewContent.setText(task.getSlogan());
-        holder.binding.textViewContent.setTypeface(Typeface.DEFAULT_BOLD);
-        holder.binding.textViewContent.setTextSize(24);
+        holder.binding.textViewSlogan.setText(task.getSlogan());
 
-        holder.binding.textViewContent.setVisibility(TextUtils.isEmpty(task.getSlogan()) ? View.GONE : View.VISIBLE);
+//        holder.binding.textViewContent.setVisibility(TextUtils.isEmpty(task.getContent()) ? View.GONE : View.VISIBLE);
 
+//        holder.binding.textViewDone.setText(String.valueOf(task.getStatus()));
 
+        if (task.getStatus() == 2) {
+            holder.binding.imageViewAlarm.setVisibility(View.VISIBLE);
+        }else {
+            holder.binding.imageViewAlarm.setVisibility(View.INVISIBLE);
+        }
+
+        holder.binding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    task.setStatus(0);
+                    holder.binding.taskCard.setCardBackgroundColor(Color.rgb(212, 203, 250));
+                } else {
+                    task.setStatus(1);
+                    holder.binding.taskCard.setCardBackgroundColor(Color.rgb(255, 255, 255));
+                }
+            }
+        });
 
 
         //长按调出添加提醒的对话框，不再提供修改日程内容的接口

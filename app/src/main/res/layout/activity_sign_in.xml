@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sign_in_background"
     android:orientation="vertical">
 
-    <androidx.core.widget.NestedScrollView
+    <View
+        android:id="@+id/view10"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="22dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="40dp" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonBackToLoginPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="#009D94EA"
+        android:clickable="true"
+        android:contentDescription="back"
+        app:backgroundTint="#9D94EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10"
+        app:srcCompat="@drawable/left_arrow"
+        app:tint="@color/white" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView10"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        app:cardBackgroundColor="#2FFFFFFF"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButtonBackToLoginPage">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/sign_in_background">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButtonBackToLoginPage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:contentDescription="back"
-                app:backgroundTint="#FDB016"
-                app:srcCompat="@drawable/left_arrow"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/textViewSignIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/floatingActionButtonBackToLoginPage"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:text="Sign Up"
-                android:textColor="@color/white"
-                android:textSize="35dp"
-                android:textStyle="bold" />
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/editTextNickname"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewSignIn"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#30ffffff"
-                android:drawableStart="@drawable/person"
+                android:background="#00FFFFFF"
+                android:drawableStart="@drawable/doge"
                 android:drawablePadding="20dp"
                 android:ems="10"
                 android:hint="请输入昵称"
@@ -67,14 +67,14 @@
 
             <EditText
                 android:id="@+id/editTextUsername"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextNickname"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#30ffffff"
+                android:background="#00FFFFFF"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="20dp"
                 android:ems="10"
@@ -86,14 +86,14 @@
 
             <EditText
                 android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextUsername"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#30ffffff"
+                android:background="#00FFFFFF"
                 android:drawableStart="@drawable/password"
                 android:drawableEnd="@drawable/eyes_open"
                 android:drawablePadding="20dp"
@@ -107,14 +107,14 @@
 
             <EditText
                 android:id="@+id/editTextPasswordConfirm"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextPassword"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#30ffffff"
+                android:background="#00FFFFFF"
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="20dp"
                 android:ems="10"
@@ -125,76 +125,80 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextPasswordConfirm"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+        </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/checkBoxUserProtocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="#00919191"
-                    android:button="@drawable/check_box_style"
-                    android:buttonTint="#E8801F"
-                    android:focusable="auto"
-                    android:text="阅读并同意"
-                    android:textColorHighlight="#FFEC42"
-                    android:textColorLink="#FFEC42"
-                    android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/textViewUserServiceAgreement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:text="@string/userServiceAgreement"
-                    android:textColor="#E8801F"
-                    android:textColorHighlight="#FFEC42"
-                    android:textColorLink="#E8801F"
-                    android:textSize="14sp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLogin"
+        android:layout_width="120dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#9D94EA"
+        android:text="注 册"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCheckBox" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="和"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+    <LinearLayout
+        android:id="@+id/linearLayoutCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView10">
 
-                <TextView
-                    android:id="@+id/textViewPrivacyPolicy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/userPrivacyPolicy"
-                    android:textColor="#E8801F"
-                    android:textColorHighlight="#FFEC42"
-                    android:textColorLink="#E8801F"
-                    android:textSize="14sp" />
-            </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkBoxUserProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#00919191"
+            android:button="@drawable/check_box_style"
+            android:buttonTint="#AE71E4"
+            android:focusable="auto"
+            android:text="阅读并同意"
+            android:textColorHighlight="#FFEC42"
+            android:textColorLink="#FFEC42"
+            android:textSize="14sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonLogin"
-                android:layout_width="120dp"
-                android:layout_height="65dp"
-                android:layout_below="@id/linearLayoutCheckBox"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#FDB016"
-                android:text="注 册"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="35dp" />
+        <TextView
+            android:id="@+id/textViewUserServiceAgreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:text="@string/userServiceAgreement"
+            android:textColor="#8A1FE8"
+            android:textColorHighlight="#BF7BFA"
+            android:textColorLink="#BF7BFA"
+            android:textSize="14sp" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="和"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
-    </androidx.core.widget.NestedScrollView>
+        <TextView
+            android:id="@+id/textViewPrivacyPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userPrivacyPolicy"
+            android:textColor="#FF8A1FE8"
+            android:textColorHighlight="#BF7BFA"
+            android:textColorLink="#BF7BFA"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

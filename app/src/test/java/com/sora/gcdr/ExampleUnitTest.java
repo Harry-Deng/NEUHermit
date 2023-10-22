@@ -2,8 +2,6 @@ package com.sora.gcdr;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import com.sora.gcdr.util.MyUtils;
 
 import java.util.Calendar;

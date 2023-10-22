@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sora.gcdr.R;
 import com.sora.gcdr.databinding.FragmentCourseTableBinding;
@@ -73,6 +73,8 @@ public class CourseTableFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentCourseTableBinding.inflate(inflater, container, false);
+        binding.toolbar.setTitle("我的课表");
+        binding.toolbar.setTitleTextColor(Color.rgb(255, 255, 255));
         return binding.getRoot();
     }
 

@@ -6,15 +6,7 @@ import android.content.SharedPreferences;
 
 import com.sora.gcdr.db.User;
 
-import java.time.LocalDateTime;
-
-import cn.leancloud.LCObject;
-import cn.leancloud.LCQuery;
-import cn.leancloud.LCSaveOption;
 import cn.leancloud.LeanCloud;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class MyApplication extends Application {
     private static MyApplication myApplication;

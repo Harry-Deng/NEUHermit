@@ -5,15 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="#CABEFF"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp">
 
     <TextView
         android:id="@+id/courseDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxHeight="120dp"
-        android:maxLines="4"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

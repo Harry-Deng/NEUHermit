@@ -17,7 +17,6 @@ import com.sora.gcdr.databinding.ActivitySetAlarmBinding;
 import com.sora.gcdr.db.task.Task;
 import com.sora.gcdr.db.task.TaskRepository;
 import com.sora.gcdr.receiver.NotificationReceiver;
-import com.sora.gcdr.util.MyUtils;
 
 
 /**
@@ -45,9 +44,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         //获取传过来的task和初始化数据
         Intent intent = getIntent();
         task = intent.getParcelableExtra("task");
-        binding.textViewDate.setText(MyUtils.getDateByLong(task.getDate()));
-        binding.textViewTime.setText(MyUtils.getTimeByLong(task.getDate()));
-        binding.textSlogan.setText(task.getSlogan());
+        binding.textContent.setText(task.getSlogan());
         binding.textRemark.setText(task.getRemark());
 
         if (task.getStatus() == 2) {
@@ -82,7 +79,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         binding.buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.setSlogan(binding.textSlogan.getText().toString());
+                task.setSlogan(binding.textContent.getText().toString());
                 if (binding.switchOpenAlarm.isChecked()) {
                     Intent notifyIntent = new Intent(v.getContext(), NotificationReceiver.class);
                     task.setStatus(2);

@@ -9,16 +9,14 @@ public class Course {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
+    //基本信息
     private String courseName;//课程名
-    private String teacher;//老师
-    private String location;//位置
-    //无法保存？
-    private String whichWeek;//哪周有课
-
-    //课的坐标
-    private int x;//周几的课
-    private int y;//第几节课
+    private String teacher;//授课教师
+    private String location;//授课地点
+    private String whichWeek;//课所在的周
+    //位置信息
+    private int x;//课所在的周
+    private int y;//课所在的节数
     private int length;//课的长度
 
     @Ignore

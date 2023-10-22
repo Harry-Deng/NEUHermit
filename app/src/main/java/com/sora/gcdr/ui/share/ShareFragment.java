@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sora.gcdr.MyApplication;
@@ -40,6 +42,7 @@ public class ShareFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        viewModel.updateShare();
 
         viewModel.getShareLiveData().observe(getViewLifecycleOwner(), new Observer<List<LCObject>>() {
             @Override
@@ -69,6 +72,7 @@ public class ShareFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewModel.getMoreShare();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -80,5 +84,27 @@ public class ShareFragment extends Fragment {
             }
         });
 
+        //右滑删除
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.
+                SimpleCallback(0
+                , ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
+                                 int direction) {
+                viewModel.getShareLiveData().getValue().remove(viewHolder.getAdapterPosition());
+                adapter.notifyDataSetChanged();
+//                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        helper.attachToRecyclerView(binding.recyclerview);
+
     }
+
 }

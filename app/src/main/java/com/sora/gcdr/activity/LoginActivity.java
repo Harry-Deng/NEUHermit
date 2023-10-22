@@ -1,9 +1,10 @@
 package com.sora.gcdr.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -16,10 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sora.gcdr.MyApplication;
 import com.sora.gcdr.databinding.ActivityLoginBinding;
 import com.sora.gcdr.db.User;
-import com.sora.gcdr.db.task.Task;
-import com.sora.gcdr.ui.home.HomeFragment;
-
-import java.util.List;
 
 import cn.leancloud.LCObject;
 import cn.leancloud.LCQuery;
@@ -52,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        this.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        this.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE|
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        );
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
@@ -76,7 +82,17 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+
+
+        binding.textViewForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MyApplication.getInstance(), "你再想想", Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+
 
     private void login() {
         LCQuery<LCObject> query = new LCQuery<>("user");
@@ -87,14 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe(new Observer<LCObject>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Toast.makeText(MyApplication.getInstance(), "登录中。，。", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onNext(LCObject lcObject) {
                         if (lcObject != null ) {
                             //登陆成功后同步云端数据到本地
-                            Toast.makeText(MyApplication.getInstance(), "登录成功。，。", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MyApplication.getInstance(), "登录成功", Toast.LENGTH_LONG).show();
                             MyApplication.getInstance().getUser().setId(lcObject.getObjectId());
                             MyApplication.getInstance().getUser().setUsername( lcObject.getString(User.KEY_USERNAME));
                             MyApplication.getInstance().getUser().setPassword( lcObject.getString(User.KEY_PASSWORD));
@@ -105,13 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                             setResult(RESULT_OK);
                             finish();
                         } else {
-                            Toast.makeText(MyApplication.getInstance(), "登录失败。，。", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MyApplication.getInstance(), "登录出错", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(MyApplication.getInstance(), "出错了。，。", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyApplication.getInstance(), "应用异常", Toast.LENGTH_LONG).show();
 
                     }
 
