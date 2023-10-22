@@ -1,4 +1,4 @@
-## 🗓️ GoodCalendar / NEUHermit-东百隐士
+## 🗓️ NEUHermit-东百隐士
   
 >This is an Android application that amalgamates multiple functionalities including a calendar, to-do tasks, moments, and class schedules, specifically catering to the students of Northeastern University with the aspiration of actual deployment in the future. The project initially originated from the author's 'Android Development Design' course assignment and was collaboratively brought to fruition by Harry and K.  
   
